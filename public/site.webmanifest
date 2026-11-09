@@ -1,0 +1,18 @@
+{
+  "name": "Rill — Your day, quietly handled.",
+  "short_name": "Rill",
+  "description": "A personal AI agent that handles email, calendar, and follow-through for people building something of their own.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c0f0c",
+  "theme_color": "#0c0f0c",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

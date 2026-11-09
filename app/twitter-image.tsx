@@ -1,0 +1,10 @@
+import { createOgImage } from "@/lib/og";
+
+export const alt = "Rill — Your day, quietly handled.";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+export const runtime = "nodejs";
+
+export default async function Image() {
+  return createOgImage();
+}
