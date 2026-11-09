@@ -6,5 +6,5 @@ window.KEEPFLOW_CONFIG = {
   siteUrl: 'https://keepflow.in',
   googleSiteVerification: '', // e.g. "abc123..." from Google Search Console HTML tag verification
   ga4MeasurementId: '', // e.g. "G-XXXXXXXXXX"
-  gtmId: '' // e.g. "GTM-XXXXXXX" (optional; use GA4 or GTM based on your setup)
+  gtmId: 'GTM-W465H4F7' // Google Tag Manager container installed in site pages
 };
