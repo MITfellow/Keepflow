@@ -1,0 +1,3223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keepflow — Your day, quietly handled.</title>
+  <!-- Keepflow favicon: Flow Channel mark (no background) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 100'%3E%3Cg fill='%230064E0'%3E%3Cpath d='M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z'/%3E%3Crect x='61' y='18' width='14' height='14' rx='4'/%3E%3Crect x='82' y='22' width='14' height='14' rx='4'/%3E%3Crect x='61' y='43' width='14' height='14' rx='4'/%3E%3Crect x='82' y='43' width='14' height='14' rx='4'/%3E%3Crect x='103' y='39' width='9' height='14' rx='4'/%3E%3Crect x='61' y='68' width='14' height='14' rx='4'/%3E%3Crect x='82' y='64' width='14' height='14' rx='4'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-white: #ffffff;
+      --bg-gray: #f5f6f8;
+      --bg-gray-deep: #ebedf0;
+      --text-primary: #0a0a0a;
+      --text-secondary: #5e6368;
+      --text-muted: #8a9099;
+      --keep-blue: #005bb5;
+      --keep-blue-bright: #0064e0;
+      --keep-blue-hover: #004791;
+      --keep-blue-soft: #e6f0ff;
+      --bubble-blue: #d3e7ff;
+      --border-light: #e5e7eb;
+      --success-green: #10b981;
+      --container-width: 1364px;
+      --content-width: 1120px;
+      --shadow-soft: 0 20px 50px rgba(10, 14, 24, 0.06), 0 2px 10px rgba(10, 14, 24, 0.03);
+      --shadow-elevated: 0 28px 68px rgba(10, 14, 24, 0.10), 0 4px 16px rgba(10, 14, 24, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+      letter-spacing: -0.028em;
+      color: var(--text-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    /* ================= NAVBAR ================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 62px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.25s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .navbar-inner {
+      width: 100%;
+      max-width: var(--container-width);
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .keepflow-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+      letter-spacing: -0.02em;
+      transition: opacity 0.2s ease;
+    }
+
+    .keepflow-brand:hover {
+      opacity: 0.85;
+    }
+
+    .keepflow-icon-box {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: none;
+      position: relative;
+      overflow: visible;
+    }
+
+    .keepflow-icon-box::after {
+      content: none;
+    }
+
+    .keepflow-logo-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 12px;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .keepflow-logo-center:hover {
+      transform: translateX(-50%) scale(1.06);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-ghost-sm {
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+
+    .btn-ghost-sm:hover {
+      color: var(--text-primary);
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-primary-sm {
+      background-color: var(--keep-blue);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 10px rgba(0, 91, 181, 0.18);
+    }
+
+    .btn-primary-sm:hover {
+      background-color: var(--keep-blue-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 91, 181, 0.26);
+    }
+
+    /* ================= HERO SECTION WITH INLINE WAITLIST ================= */
+    .page-wrapper {
+      padding-top: 62px;
+    }
+
+    .hero-section {
+      position: relative;
+      padding: 84px 24px 72px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, #f0f6ff 0%, rgba(240, 246, 255, 0) 62%), var(--bg-white);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 100, 224, 0.16);
+      padding: 6px 14px 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1c1e21;
+      box-shadow: 0 4px 16px rgba(0, 91, 181, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .badge-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--keep-blue-bright);
+      box-shadow: 0 0 0 4px rgba(0, 100, 224, 0.15);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.15); }
+      50% { box-shadow: 0 0 0 6px rgba(0, 100, 224, 0.28); }
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 5.2vw, 62px);
+      font-weight: 700;
+      line-height: 1.08;
+      max-width: 780px;
+      margin: 0 auto 20px;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-title span.gradient-word {
+      background: linear-gradient(135deg, #005bb5 0%, #0082ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 17.5px;
+      line-height: 1.58;
+      color: var(--text-secondary);
+      max-width: 570px;
+      margin: 0 auto 34px;
+      font-weight: 400;
+    }
+
+    /* Inline Waitlist Form */
+    .waitlist-bar {
+      max-width: 480px;
+      margin: 0 auto 16px;
+      background: #ffffff;
+      border: 1.5px solid #dfe3e8;
+      border-radius: 999px;
+      padding: 6px 6px 6px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 12px 34px rgba(10, 14, 24, 0.06);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .waitlist-bar:focus-within {
+      border-color: var(--keep-blue-bright);
+      box-shadow: 0 12px 36px rgba(0, 100, 224, 0.12);
+    }
+
+    .waitlist-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 14.5px;
+      color: var(--text-primary);
+      width: 100%;
+      padding-right: 12px;
+    }
+
+    .waitlist-bar input::placeholder {
+      color: #9aa0a6;
+    }
+
+    .btn-waitlist-submit {
+      background: var(--keep-blue);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-waitlist-submit:hover {
+      background: var(--keep-blue-hover);
+    }
+
+    .hero-social-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-stack span {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      margin-left: -6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .avatar-stack span:first-child {
+      margin-left: 0;
+    }
+
+    .waitlist-success-inline {
+      display: none;
+      max-width: 480px;
+      margin: 0 auto 16px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* ================= SECTIONS GENERAL ================= */
+    .feature-section {
+      width: 100%;
+      min-height: 760px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 96px 24px;
+      position: relative;
+    }
+
+    .feature-section.bg-gray {
+      background-color: var(--bg-gray);
+    }
+
+    .feature-section.bg-white {
+      background-color: var(--bg-white);
+    }
+
+    .feature-container {
+      width: 100%;
+      max-width: var(--container-width);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .feature-text {
+      max-width: 475px;
+    }
+
+    .feature-text.left-aligned {
+      margin-left: 0;
+    }
+
+    .feature-text.right-aligned {
+      margin-left: 48px;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--keep-blue-bright);
+      margin-bottom: 12px;
+    }
+
+    .feature-text h2 {
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 18px;
+      color: #0a0a0a;
+    }
+
+    .feature-text p {
+      font-size: 15.5px;
+      line-height: 1.58;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .feature-text p a {
+      color: var(--keep-blue-bright);
+      font-weight: 500;
+    }
+
+    .feature-text p a:hover {
+      text-decoration: underline;
+    }
+
+    .visual-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================= SECTION 1: CLOUD COMPUTER / MOVIE TICKETS ================= */
+    .phone-shell {
+      width: 288px;
+      background: #fafafa;
+      border: 5px solid #ffffff;
+      border-radius: 38px;
+      box-shadow: var(--shadow-elevated);
+      padding: 46px 16px 24px;
+      position: relative;
+      transition: transform 0.35s ease;
+    }
+
+    .phone-shell:hover {
+      transform: translateY(-4px);
+    }
+
+    .muse-top-pill {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 20px 22px 9px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      min-width: 132px;
+      z-index: 5;
+    }
+
+    .muse-avatar-mini {
+      width: 34px;
+      height: 34px;
+      position: absolute;
+      top: -17px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .muse-top-pill .name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #111;
+      display: block;
+    }
+
+    .muse-top-pill .status {
+      font-size: 10px;
+      color: #71767b;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .chat-bubble-white {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 12px 15px;
+      font-size: 11.5px;
+      line-height: 1.42;
+      color: #1c1e21;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      width: 266px;
+      margin-left: -38px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .user-bubbles-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      margin-top: 14px;
+      margin-right: -8px;
+    }
+
+    .chat-bubble-blue {
+      background: var(--bubble-blue);
+      color: #0a0a0a;
+      font-size: 11.5px;
+      font-weight: 450;
+      padding: 8px 13px;
+      border-radius: 15px;
+      box-shadow: 0 2px 6px rgba(0, 100, 224, 0.06);
+    }
+
+    .browser-widget {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 13px;
+      width: 256px;
+      margin-left: -34px;
+      margin-top: 14px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+      position: relative;
+      z-index: 4;
+    }
+
+    .browser-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .browser-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .browser-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #e7f1ff;
+      color: #0064e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .browser-title {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.2;
+    }
+
+    .browser-sub {
+      font-size: 9.5px;
+      color: #777;
+    }
+
+    .vm-live-badge {
+      font-size: 8px;
+      font-weight: 600;
+      color: #059669;
+      background: #ecfdf5;
+      padding: 2px 6px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .vm-live-badge::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .seat-map-box {
+      background: #f5f6f8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .screen-curve {
+      width: 85%;
+      height: 6px;
+      border-top: 2px solid #cbd5e1;
+      border-radius: 50% 50% 0 0;
+      margin: 0 auto 3px;
+    }
+
+    .screen-label {
+      font-size: 6px;
+      letter-spacing: 0.14em;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .seat-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .seat-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .row-letter {
+      font-size: 6px;
+      color: #94a3b8;
+      width: 8px;
+      text-align: left;
+    }
+
+    .seat-aisle {
+      width: 4px;
+    }
+
+    .seat {
+      width: 9px;
+      height: 8px;
+      border-radius: 2px;
+      background: #cbd5e1;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .seat.avail {
+      background: #e2e8f0;
+      cursor: pointer;
+    }
+
+    .seat.avail:hover {
+      transform: scale(1.25);
+      background: #93c5fd;
+    }
+
+    .seat.selected {
+      background: #0064e0;
+      cursor: pointer;
+    }
+
+    .seat-legend {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 6.5px;
+      color: #64748b;
+    }
+
+    .seat-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .dot-leg {
+      width: 5px;
+      height: 5px;
+      border-radius: 1.5px;
+      display: inline-block;
+    }
+
+    .btn-open-browser {
+      margin-top: 10px;
+      width: 100%;
+      background: #f2f3f5;
+      border: none;
+      border-radius: 10px;
+      padding: 7.5px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #111;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-open-browser:hover {
+      background: #e4e6eb;
+    }
+
+    .floating-message-bar {
+      width: 344px;
+      margin-left: -33px;
+      margin-top: 16px;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      position: relative;
+      z-index: 5;
+    }
+
+    .msg-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #9aa0a6;
+      font-size: 12px;
+    }
+
+    .msg-left span.plus {
+      color: #1c1e21;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .msg-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #5f6368;
+    }
+
+    /* Floating Popcorn Buckets */
+    .popcorn-item {
+      position: absolute;
+      pointer-events: none;
+      z-index: 6;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+      animation: floatPopcorn 5s ease-in-out infinite;
+    }
+
+    .popcorn-item:nth-child(even) {
+      animation-duration: 6.2s;
+      animation-direction: reverse;
+    }
+
+    @keyframes floatPopcorn {
+      0%, 100% { transform: translateY(0px) rotate(12deg); }
+      50% { transform: translateY(-7px) rotate(18deg); }
+    }
+
+    /* ================= SECTION 2: PERSONAL, CAPABLE & EFFORTLESS ================= */
+    .dual-phones-wrapper {
+      position: relative;
+      width: 500px;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-front-left {
+      width: 266px;
+      background: #fafafa;
+      border: 4px solid #ffffff;
+      border-radius: 36px;
+      box-shadow: var(--shadow-elevated);
+      padding: 42px 14px 18px;
+      position: absolute;
+      left: 36px;
+      top: 18px;
+      z-index: 4;
+      transition: transform 0.35s ease;
+    }
+
+    .phone-front-left:hover {
+      transform: translateY(-4px);
+    }
+
+    .pdf-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 12px;
+      margin-left: -22px;
+      margin-top: 10px;
+      width: 256px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .pdf-preview {
+      background: #fcfcfd;
+      border: 1px solid #f0f1f3;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 6.5px;
+      color: #4b5563;
+    }
+
+    .pdf-preview-top {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 5.5px;
+      color: #6b7280;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .pdf-preview-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 6px;
+    }
+
+    .pdf-line {
+      height: 3px;
+      background: #e5e7eb;
+      border-radius: 2px;
+      margin-bottom: 3px;
+    }
+
+    .pdf-form-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+      padding: 3px 0;
+      font-size: 5.5px;
+    }
+
+    .pdf-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 4px;
+    }
+
+    .pdf-badge {
+      width: 24px;
+      height: 28px;
+      background: #e11d48;
+      color: #fff;
+      font-size: 7px;
+      font-weight: 700;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .typing-pill {
+      width: 44px;
+      height: 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-top: 12px;
+      margin-left: 8px;
+    }
+
+    .typing-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #9ca3af;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+      40% { transform: translateY(-3px); opacity: 1; }
+    }
+
+    .send-it-bar {
+      width: 306px;
+      margin-left: -24px;
+      margin-top: 14px;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 7px 8px 7px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .send-it-bar:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 32px rgba(0, 100, 224, 0.12);
+    }
+
+    .send-up-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #d3e7ff;
+      color: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .send-it-bar:hover .send-up-btn {
+      background: var(--keep-blue-bright);
+      color: #ffffff;
+    }
+
+    .phone-back-right {
+      width: 244px;
+      background: #ffffff;
+      border-radius: 34px;
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      position: absolute;
+      right: 18px;
+      top: 64px;
+      z-index: 2;
+      transition: transform 0.35s ease;
+    }
+
+    .phone-back-right:hover {
+      transform: translateY(-4px);
+    }
+
+    .character-stage {
+      height: 215px;
+      background: radial-gradient(circle at 50% 60%, #fcfaf7 0%, #f5f3ef 100%);
+      border-radius: 24px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .call-controls-pill {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+
+    /* ================= SECTION 3: STAY IN CONTROL (STROLLER) ================= */
+    .stroller-scene {
+      position: relative;
+      width: 440px;
+      height: 490px;
+    }
+
+    .stroller-phone-bg {
+      width: 280px;
+      height: 460px;
+      background: #fafafa;
+      border: 4px solid #ffffff;
+      border-radius: 36px;
+      box-shadow: var(--shadow-soft);
+      position: absolute;
+      right: 30px;
+      top: 0;
+      padding: 18px;
+    }
+
+    .order-approval-card {
+      width: 262px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10);
+      position: absolute;
+      left: 24px;
+      top: 112px;
+      z-index: 5;
+      transition: transform 0.3s ease;
+    }
+
+    .approval-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .stroller-product-box {
+      background: #f7f8fa;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .mini-store-nav {
+      display: flex;
+      justify-content: space-between;
+      font-size: 5.5px;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    .stroller-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .credit-card-row {
+      background: #f3f4f6;
+      border-radius: 11px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: #111;
+      margin-bottom: 12px;
+    }
+
+    .visa-badge {
+      background: #1e3a8a;
+      color: #fff;
+      font-size: 6px;
+      font-weight: 700;
+      padding: 3px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+    }
+
+    .est-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: #4b5563;
+      margin-bottom: 12px;
+      padding: 0 2px;
+    }
+
+    .est-total-row strong {
+      color: #111;
+      font-weight: 700;
+    }
+
+    .btn-allow {
+      width: 100%;
+      background: var(--keep-blue-bright);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 9px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-allow:hover {
+      background: var(--keep-blue-hover);
+    }
+
+    .btn-deny {
+      width: 100%;
+      background: #f2f3f5;
+      color: #111111;
+      border: none;
+      border-radius: 999px;
+      padding: 9px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-deny:hover {
+      background: #e5e7eb;
+    }
+
+    .approval-status-banner {
+      display: none;
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* ================= SECTION 4: SECURE CREDENTIALS STORE ================= */
+    .credentials-card {
+      width: 312px;
+      background: #f2f4f7;
+      border: 2px solid #ffffff;
+      border-radius: 32px;
+      padding: 26px 22px 22px;
+      box-shadow: var(--shadow-elevated);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .credentials-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .shield-icon-box {
+      width: 54px;
+      height: 54px;
+      background: #ffffff;
+      border-radius: 16px;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .credentials-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 18px;
+    }
+
+    .cred-input-single {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 11px;
+      color: #1c1e21;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cred-input-double {
+      background: #ffffff;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 11px;
+      color: #1c1e21;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .cred-input-double .row {
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cred-input-double .row + .row {
+      border-top: 1px solid #f1f3f5;
+      font-size: 11px;
+    }
+
+    .pw-toggle-btn {
+      font-size: 9.5px;
+      color: var(--keep-blue-bright);
+      background: none;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-enter {
+      width: 100%;
+      background: var(--keep-blue-bright);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-enter:hover {
+      background: var(--keep-blue-hover);
+    }
+
+    .cred-cancel {
+      font-size: 11px;
+      font-weight: 600;
+      color: #1c1e21;
+      cursor: pointer;
+    }
+
+    /* ================= SECTION 5: GOALS & IDEAS ================= */
+    .goals-ideas-wrapper {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .goals-card {
+      width: 232px;
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 24px 20px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.06);
+      z-index: 2;
+    }
+
+    .goals-card h4,
+    .ideas-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 16px;
+    }
+
+    .goal-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: #1c1e21;
+      border-bottom: 1px solid #f6f7f8;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.15s ease;
+    }
+
+    .goal-item:last-child {
+      border-bottom: none;
+    }
+
+    .goal-item.completed {
+      color: #9ca3af;
+      text-decoration: line-through;
+    }
+
+    .goal-radio-active {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #e0eeff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .goal-radio-active::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0064e0;
+    }
+
+    .goal-check {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1.5px solid #cbd5e1;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: all 0.15s ease;
+    }
+
+    .goal-item.completed .goal-check {
+      background: #9ca3af;
+      border-color: #9ca3af;
+      color: #fff;
+    }
+
+    .ideas-card {
+      width: 316px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 26px 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+      margin-left: -24px;
+      margin-top: -16px;
+      z-index: 3;
+    }
+
+    .idea-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 13px 8px;
+      margin: 0 -8px;
+      border-radius: 14px;
+      border-bottom: 1px solid #f2f4f7;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .idea-row:hover {
+      background-color: #f8fafc;
+    }
+
+    .idea-row:first-of-type {
+      padding-top: 6px;
+    }
+
+    .idea-row:last-of-type {
+      border-bottom: none;
+      padding-bottom: 4px;
+    }
+
+    .idea-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .idea-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .idea-desc {
+      font-size: 9.5px;
+      line-height: 1.45;
+      color: #65676b;
+    }
+
+    /* ================= SECTION 6: APP ICONS GRID ================= */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 56px);
+      grid-template-rows: repeat(6, 56px);
+      gap: 20px;
+      padding: 16px;
+    }
+
+    .app-tile {
+      width: 56px;
+      height: 56px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.08),
+        0 8px 18px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      background: #ffffff;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease, opacity 0.3s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .app-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 42%, rgba(0,0,0,0.04) 100%);
+      pointer-events: none;
+    }
+
+    .app-tile img.icon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .app-tile:hover {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.08),
+        0 14px 28px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      z-index: 5;
+    }
+
+    .app-tile.blurred {
+      filter: blur(7px);
+      opacity: 0.72;
+      transform: scale(0.96);
+    }
+
+    .app-tile.blurred:hover {
+      filter: blur(0px);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    /* ================= SECTION 7: TOUR + LEARN MORE + WAITLIST CTA + FOOTER ================= */
+    .tour-section {
+      background: var(--bg-white);
+      padding: 88px 24px 40px;
+      text-align: center;
+    }
+
+    .tour-section h2 {
+      font-size: 38px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .tour-section p {
+      font-size: 15.5px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .tour-chapters {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f3f4f6;
+      padding: 5px;
+      border-radius: 999px;
+      margin-bottom: 36px;
+    }
+
+    .chapter-pill {
+      border: none;
+      background: transparent;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chapter-pill.active {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .tour-video-card {
+      max-width: var(--content-width);
+      height: 540px;
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      background: #2b2620;
+      box-shadow: var(--shadow-elevated);
+      cursor: pointer;
+    }
+
+    .video-overlay-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.14);
+      transition: background 0.25s ease;
+    }
+
+    .tour-video-card:hover .video-overlay-play {
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .play-circle-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tour-video-card:hover .play-circle-btn {
+      transform: scale(1.08);
+    }
+
+    .video-caption-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 28px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(15, 18, 24, 0.65);
+      backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      border-radius: 16px;
+    }
+
+    /* Learn More Section */
+    .learn-more-section {
+      background: var(--bg-white);
+      padding: 150px 24px 110px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .learn-more-container {
+      width: 100%;
+      max-width: var(--content-width);
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 88px;
+      align-items: center;
+    }
+
+    .learn-more-left h2 {
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+
+    .learn-more-left p {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 310px;
+    }
+
+    .learn-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .learn-item {
+      display: grid;
+      grid-template-columns: 28px 1fr 20px;
+      gap: 16px;
+      padding: 28px 12px;
+      margin: 0 -12px;
+      border-radius: 14px;
+      border-bottom: 1px solid #e5e7eb;
+      align-items: start;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .learn-item:last-child {
+      border-bottom: none;
+    }
+
+    .learn-item:hover {
+      background-color: #f9fafb;
+    }
+
+    .learn-item-icon {
+      color: #4b5563;
+      margin-top: 2px;
+    }
+
+    .learn-item-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0a0a0a;
+      margin-bottom: 7px;
+      letter-spacing: -0.01em;
+    }
+
+    .learn-item-body p {
+      font-size: 14.5px;
+      line-height: 1.48;
+      color: var(--text-secondary);
+      max-width: 540px;
+    }
+
+    .learn-item-detail {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #f3f6fb;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #334155;
+    }
+
+    .learn-item.expanded .learn-item-detail {
+      display: block;
+    }
+
+    .learn-item-arrow {
+      color: #4b5563;
+      align-self: center;
+      display: flex;
+      justify-content: flex-end;
+      transition: transform 0.2s ease;
+    }
+
+    .learn-item.expanded .learn-item-arrow {
+      transform: rotate(90deg);
+    }
+
+    /* ================= READY TO TRY KEEPFLOW + WAITLIST SECTION ================= */
+    .cta-section {
+      background: var(--bg-white);
+      padding: 110px 24px 190px;
+      text-align: center;
+    }
+
+    .cta-card-container {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: -0.028em;
+    }
+
+    .cta-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    .role-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .role-chip {
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .role-chip.selected {
+      border-color: var(--keep-blue-bright);
+      background: var(--keep-blue-soft);
+      color: var(--keep-blue);
+      font-weight: 600;
+    }
+
+    .cta-secondary-login {
+      margin-top: 22px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .cta-secondary-login a {
+      color: var(--keep-blue-bright);
+      font-weight: 600;
+    }
+
+    .cta-secondary-login a:hover {
+      text-decoration: underline;
+    }
+
+    /* ================= WAITLIST MODAL ================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 24, 0.45);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .waitlist-modal {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 36px 32px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22);
+      position: relative;
+      text-align: center;
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: #f3f4f6;
+      color: #4b5563;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .modal-close:hover {
+      background: #e5e7eb;
+    }
+
+    .modal-input {
+      width: 100%;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .modal-input:focus {
+      border-color: var(--keep-blue-bright);
+    }
+
+    .btn-modal-submit {
+      width: 100%;
+      background: var(--keep-blue);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-modal-submit:hover {
+      background: var(--keep-blue-hover);
+    }
+
+    /* ================= FOOTER ================= */
+    .site-footer {
+      width: 100%;
+      background: var(--bg-white);
+      padding: 28px 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-inner {
+      width: 100%;
+      max-width: var(--container-width);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links button {
+      appearance: none;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .footer-links button:hover {
+      color: var(--text-primary);
+      border-color: rgba(0,0,0,0.2);
+    }
+
+    .footer-from-keepflow {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-secondary);
+    }
+
+    .footer-from-keepflow strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 13.5px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    @media (max-width: 1024px) {
+      .feature-container,
+      .learn-more-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        justify-items: center;
+        text-align: center;
+      }
+      .feature-text.right-aligned {
+        margin-left: 0;
+      }
+      .learn-more-left p {
+        margin: 0 auto;
+      }
+      .learn-item {
+        text-align: left;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ================= FIXED TOP NAVBAR ================= -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <!-- Left Keepflow Icon + Brand Lockup -->
+      <a href="#" class="keepflow-brand" aria-label="Keepflow">
+        <span class="keepflow-icon-box">
+          <svg width="20" height="18" viewBox="0 0 112 100" fill="#0064E0" aria-hidden="true">
+            <path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/>
+            <rect x="61" y="18" width="14" height="14" rx="4"/><rect x="82" y="22" width="14" height="14" rx="4"/>
+            <rect x="61" y="43" width="14" height="14" rx="4"/><rect x="82" y="43" width="14" height="14" rx="4"/><rect x="103" y="39" width="9" height="14" rx="4"/>
+            <rect x="61" y="68" width="14" height="14" rx="4"/><rect x="82" y="64" width="14" height="14" rx="4"/>
+          </svg>
+        </span>
+        <span>Keepflow</span>
+      </a>
+
+
+      <!-- Right Actions: Log in & Join Waitlist -->
+      <div class="nav-actions">
+        <button class="btn-ghost-sm" onclick="openWaitlistModal('login')">Log in</button>
+        <button class="btn-primary-sm" onclick="openWaitlistModal('waitlist')">
+          <span>Join waitlist</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+
+    <!-- ================= HERO SECTION WITH WAITLIST ================= -->
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        <span>Introducing Keepflow 1.0 · Early access rolling out weekly</span>
+      </div>
+
+      <h1 class="hero-title">
+        Your day, <span class="gradient-word">quietly handled.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Meet Keepflow—the personal AI agent with its own cloud computer that books, researches, follows up, and keeps life moving under your direction.
+      </p>
+
+      <!-- Hero Inline Waitlist Form -->
+      <form class="waitlist-bar" id="heroWaitlistForm" onsubmit="handleInlineWaitlist(event, 'hero')">
+        <input type="email" id="heroEmailInput" placeholder="Enter your email for early access..." required />
+        <button type="submit" class="btn-waitlist-submit">Join waitlist</button>
+      </form>
+
+      <div class="waitlist-success-inline" id="heroWaitlistSuccess">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <span id="heroSuccessText">You're on the Keepflow waitlist! Spot #14,821 reserved.</span>
+      </div>
+
+      <div class="hero-social-proof">
+        <div class="avatar-stack">
+          <span style="background:#0064e0;">A</span>
+          <span style="background:#10b981;">M</span>
+          <span style="background:#8b5cf6;">S</span>
+          <span style="background:#f59e0b;">J</span>
+        </div>
+        <span><strong id="waitlistCounter">14,820</strong> people ahead in queue · Invite code priority available</span>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 1: CLOUD COMPUTER IN THE CLOUD ================= -->
+    <section class="feature-section bg-white">
+      <div class="feature-container reveal">
+        <!-- Left Phone Visual -->
+        <div class="visual-col">
+          <div class="phone-shell">
+            <!-- Top Keepflow Badge -->
+            <div class="muse-top-pill">
+              <svg class="muse-avatar-mini" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" fill="#E8DEC8"/>
+                <path d="M10 34C10 25 14 14 20 14C26 14 30 25 30 34" fill="#D8CBB3"/>
+                <ellipse cx="20" cy="22" rx="7" ry="5.5" fill="#F5D3B8"/>
+                <circle cx="17.2" cy="21.5" r="1.1" fill="#1C1E21"/>
+                <circle cx="22.8" cy="21.5" r="1.1" fill="#1C1E21"/>
+                <path d="M19 23.2Q20 24.2 21 23.2" stroke="#1C1E21" stroke-width="0.9" stroke-linecap="round"/>
+              </svg>
+              <span class="name">Keepflow</span>
+              <span class="status">🍿 Booking tickets...</span>
+            </div>
+
+            <!-- Incoming Bubble -->
+            <div class="chat-bubble-white">
+              Tickets just opened for the movie you're tracking. 4:30 PM or 7:30 PM. Interested?
+            </div>
+
+            <!-- User Reply Bubbles -->
+            <div class="user-bubbles-group">
+              <div class="chat-bubble-blue">Yeah, book for 2</div>
+              <div class="chat-bubble-blue">Lets do 7:30pm</div>
+            </div>
+
+            <!-- Browser Selecting Seats Card -->
+            <div class="browser-widget">
+              <div class="browser-widget-header">
+                <div class="browser-header-left">
+                  <div class="browser-icon">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="browser-title">Browser</div>
+                    <div class="browser-sub" id="seatStatusText">Selecting 2 seats (C5, C6)...</div>
+                  </div>
+                </div>
+                <span class="vm-live-badge">VM Live</span>
+              </div>
+
+              <div class="seat-map-box">
+                <div class="screen-curve"></div>
+                <div class="screen-label">SCREEN</div>
+                <div class="seat-rows" id="interactiveSeatMap">
+                  <!-- Row A -->
+                  <div class="seat-row">
+                    <span class="row-letter">A</span>
+                    <span class="seat avail" data-seat="A1"></span><span class="seat avail" data-seat="A2"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat avail" data-seat="A7"></span><span class="seat avail" data-seat="A8"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat avail" data-seat="A9"></span><span class="seat avail" data-seat="A10"></span>
+                  </div>
+                  <!-- Row B -->
+                  <div class="seat-row">
+                    <span class="row-letter">B</span>
+                    <span class="seat avail" data-seat="B1"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat avail" data-seat="B9"></span><span class="seat avail" data-seat="B10"></span>
+                  </div>
+                  <!-- Row C -->
+                  <div class="seat-row">
+                    <span class="row-letter">C</span>
+                    <span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span><span class="seat selected" data-seat="C5"></span><span class="seat selected" data-seat="C6"></span><span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat avail" data-seat="C10"></span>
+                  </div>
+                  <!-- Row D -->
+                  <div class="seat-row">
+                    <span class="row-letter">D</span>
+                    <span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span>
+                  </div>
+                  <!-- Row E -->
+                  <div class="seat-row">
+                    <span class="row-letter">E</span>
+                    <span class="seat avail" data-seat="E1"></span><span class="seat avail" data-seat="E2"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat avail" data-seat="E3"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat"></span><span class="seat avail" data-seat="E8"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat avail" data-seat="E9"></span><span class="seat avail" data-seat="E10"></span>
+                  </div>
+                  <!-- Row F -->
+                  <div class="seat-row">
+                    <span class="row-letter">F</span>
+                    <span class="seat avail" data-seat="F1"></span><span class="seat avail" data-seat="F2"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat"></span><span class="seat"></span><span class="seat avail" data-seat="F5"></span><span class="seat avail" data-seat="F6"></span><span class="seat"></span><span class="seat"></span>
+                    <span class="seat-aisle"></span>
+                    <span class="seat avail" data-seat="F9"></span><span class="seat avail" data-seat="F10"></span>
+                  </div>
+                </div>
+                <div class="seat-legend">
+                  <span><i class="dot-leg" style="background:#e2e8f0"></i> Available (Click)</span>
+                  <span><i class="dot-leg" style="background:#cbd5e1"></i> Taken</span>
+                  <span><i class="dot-leg" style="background:#0064e0"></i> Your seats</span>
+                </div>
+              </div>
+
+              <button class="btn-open-browser" id="openVmBtn" onclick="toggleVmPreview()">Open browser</button>
+            </div>
+
+            <!-- Floating Popcorn Buckets -->
+            <svg class="popcorn-item" style="right: -18px; bottom: 56px; width: 48px; height: 58px;" viewBox="0 0 48 58">
+              <circle cx="17" cy="14" r="7" fill="#FACC15"/><circle cx="25" cy="11" r="8" fill="#FDE047"/><circle cx="33" cy="15" r="7" fill="#FACC15"/><circle cx="21" cy="17" r="6" fill="#FEF08A"/>
+              <polygon points="10,18 38,18 34,52 14,52" fill="#FFFFFF"/>
+              <polygon points="10,18 15,18 17,52 14,52" fill="#DC2626"/>
+              <polygon points="21,18 27,18 26,52 22,52" fill="#DC2626"/>
+              <polygon points="33,18 38,18 34,52 31,52" fill="#DC2626"/>
+            </svg>
+            <svg class="popcorn-item" style="right: -6px; bottom: 135px; width: 26px; height: 32px;" viewBox="0 0 48 58">
+              <circle cx="18" cy="14" r="7" fill="#FACC15"/><circle cx="28" cy="12" r="8" fill="#FDE047"/>
+              <polygon points="10,18 38,18 34,52 14,52" fill="#FFFFFF"/>
+              <polygon points="10,18 16,18 18,52 14,52" fill="#DC2626"/>
+              <polygon points="22,18 28,18 27,52 22,52" fill="#DC2626"/>
+              <polygon points="33,18 38,18 34,52 31,52" fill="#DC2626"/>
+            </svg>
+            <svg class="popcorn-item" style="right: -46px; bottom: 175px; width: 30px; height: 36px;" viewBox="0 0 48 58">
+              <circle cx="18" cy="14" r="7" fill="#FACC15"/><circle cx="28" cy="12" r="8" fill="#FDE047"/>
+              <polygon points="10,18 38,18 34,52 14,52" fill="#FFFFFF"/>
+              <polygon points="10,18 16,18 18,52 14,52" fill="#DC2626"/>
+              <polygon points="22,18 28,18 27,52 22,52" fill="#DC2626"/>
+              <polygon points="33,18 38,18 34,52 31,52" fill="#DC2626"/>
+            </svg>
+            <svg class="popcorn-item" style="right: -12px; top: 196px; width: 18px; height: 22px;" viewBox="0 0 48 58">
+              <circle cx="24" cy="13" r="9" fill="#FDE047"/>
+              <polygon points="10,18 38,18 34,52 14,52" fill="#DC2626"/>
+              <polygon points="17,18 23,18 23,52 18,52" fill="#FFFFFF"/>
+              <polygon points="28,18 33,18 31,52 27,52" fill="#FFFFFF"/>
+            </svg>
+            <svg class="popcorn-item" style="right: -34px; top: 230px; width: 14px; height: 18px; opacity: 0.85;" viewBox="0 0 48 58">
+              <circle cx="24" cy="13" r="9" fill="#FDE047"/>
+              <polygon points="10,18 38,18 34,52 14,52" fill="#DC2626"/>
+              <polygon points="18,18 28,18 27,52 19,52" fill="#FFFFFF"/>
+            </svg>
+
+            <!-- Bottom Message Bar -->
+            <div class="floating-message-bar">
+              <div class="msg-left">
+                <span class="plus">+</span>
+                <span>Message</span>
+              </div>
+              <div class="msg-right">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="2" width="6" height="11" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/>
+                </svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round">
+                  <line x1="4" y1="10" x2="4" y2="14"/><line x1="8" y1="6" x2="8" y2="18"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="16" y1="7" x2="16" y2="17"/><line x1="20" y1="10" x2="20" y2="14"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Copy -->
+        <div class="feature-text right-aligned">
+          <div class="section-eyebrow">Keepflow Cloud VM</div>
+          <h2>Every Keepflow user shares their own computer in the cloud with their Keepflow.</h2>
+          <p>
+            Keepflow Secure VM is a persistent, isolated Linux computer with a full browser that you and your agent can use to complete tasks, allowing you to intervene at any point. It's your computer and your browser, with the storage, CPU, and memory to handle real work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 2: PERSONAL, CAPABLE AND EFFORTLESS ================= -->
+    <section class="feature-section bg-gray">
+      <div class="feature-container reveal">
+        <!-- Left Copy -->
+        <div class="feature-text left-aligned">
+          <div class="section-eyebrow">Omnichannel Agent</div>
+          <h2>Personal, capable and effortless</h2>
+          <p>
+            Keepflow takes on real tasks, and it does them better because it knows you. Chat with your agent using the Keepflow app on mobile, desktop or directly in WhatsApp, by message or with voice mode.
+          </p>
+        </div>
+
+        <!-- Right Dual Phones Visual -->
+        <div class="visual-col">
+          <div class="dual-phones-wrapper">
+            <!-- Front Left Phone -->
+            <div class="phone-front-left">
+              <div class="muse-top-pill" style="padding: 18px 20px 7px; min-width: 96px;">
+                <svg class="muse-avatar-mini" viewBox="0 0 40 40" fill="none">
+                  <circle cx="20" cy="20" r="18" fill="#E8DEC8"/>
+                  <path d="M10 34C10 25 14 14 20 14C26 14 30 25 30 34" fill="#D8CBB3"/>
+                  <ellipse cx="20" cy="22" rx="7" ry="5.5" fill="#F5D3B8"/>
+                  <circle cx="17.2" cy="21.5" r="1.1" fill="#1C1E21"/>
+                  <circle cx="22.8" cy="21.5" r="1.1" fill="#1C1E21"/>
+                </svg>
+                <span class="name">Keepflow</span>
+              </div>
+
+              <div class="chat-bubble-white" style="width: 248px; margin-left: -22px; margin-top: 6px;">
+                Filled out the field trip form from your email – it was due today
+              </div>
+
+              <!-- PDF Card -->
+              <div class="pdf-card">
+                <div class="pdf-preview">
+                  <div class="pdf-preview-top">
+                    <span style="width:7px;height:7px;background:#0064e0;border-radius:2px;display:inline-block;"></span>
+                    <span>LINCOLN MIDDLE SCHOOL · GRADE 7 SCIENCE</span>
+                  </div>
+                  <div class="pdf-preview-title">Field Trip Permission Slip</div>
+                  <div class="pdf-line" style="width: 92%"></div>
+                  <div class="pdf-line" style="width: 78%; margin-bottom: 7px;"></div>
+                  <div class="pdf-form-row"><span>STUDENT</span><strong style="color:#111">Amara Osei</strong></div>
+                  <div class="pdf-form-row"><span>PARENT/GUARDIAN</span><strong style="color:#111">Jordan Osei</strong></div>
+                  <div class="pdf-form-row" style="border:none"><span>EMERGENCY</span><strong style="color:#111">555-0192</strong></div>
+                </div>
+                <div class="pdf-footer">
+                  <div style="display:flex;align-items:center;gap:9px;">
+                    <div class="pdf-badge">PDF</div>
+                    <div>
+                      <div style="font-size:10px;font-weight:600;color:#111;">Field trip permission slip</div>
+                      <div style="font-size:8.5px;color:#777;" id="pdfSubStatus">PDF · Ready to sign & send</div>
+                    </div>
+                  </div>
+                  <span style="color:#9ca3af;font-size:11px;">•••</span>
+                </div>
+              </div>
+
+              <!-- User Bubble with emoji reaction -->
+              <div class="user-bubbles-group" id="fieldTripChatStream" style="margin-top: 12px;">
+                <div class="chat-bubble-blue" style="position:relative;">
+                  Omg I forgot!
+                  <span style="position:absolute;bottom:-8px;right:4px;background:#fff;border-radius:50%;padding:1px 3px;font-size:9px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">🤗</span>
+                </div>
+              </div>
+
+              <!-- Typing Dots -->
+              <div class="typing-pill" id="typingIndicatorPill">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+
+              <!-- Interactive Send It Bar -->
+              <div class="send-it-bar" id="sendItBar" onclick="triggerSendPermissionSlip()">
+                <div style="display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:#111;">
+                  <span style="font-size:17px;font-weight:400;">+</span>
+                  <span id="sendItText">Send it</span>
+                </div>
+                <div class="send-up-btn">↑</div>
+              </div>
+            </div>
+
+            <!-- Back Right Phone with 3D Plush Character -->
+            <div class="phone-back-right">
+              <div class="character-stage">
+                <svg width="185" height="190" viewBox="0 0 200 200" fill="none">
+                  <defs>
+                    <radialGradient id="plushFur" cx="45%" cy="35%" r="65%">
+                      <stop offset="0%" stop-color="#EDE3D2"/>
+                      <stop offset="65%" stop-color="#D7C7B2"/>
+                      <stop offset="100%" stop-color="#BFA992"/>
+                    </radialGradient>
+                    <radialGradient id="faceSkin" cx="50%" cy="40%" r="60%">
+                      <stop offset="0%" stop-color="#FCE3CD"/>
+                      <stop offset="100%" stop-color="#ECC2A1"/>
+                    </radialGradient>
+                  </defs>
+                  <path d="M36 195 C38 110, 52 28, 100 28 C148 28, 162 110, 164 195 Z" fill="url(#plushFur)"/>
+                  <path d="M145 128 C165 112, 182 104, 190 112 C198 120, 184 146, 154 156 Z" fill="url(#plushFur)"/>
+                  <path d="M48 135 C30 152, 26 175, 38 188 C46 195, 58 178, 56 155 Z" fill="url(#plushFur)"/>
+                  <ellipse cx="100" cy="86" rx="37" ry="27" fill="#B59E86"/>
+                  <ellipse cx="100" cy="86" rx="34" ry="24.5" fill="url(#faceSkin)"/>
+                  <ellipse cx="77" cy="92" rx="6" ry="3.5" fill="#F2A68D" opacity="0.55"/>
+                  <ellipse cx="123" cy="92" rx="6" ry="3.5" fill="#F2A68D" opacity="0.55"/>
+                  <circle cx="84" cy="84" r="4.3" fill="#1F1916"/>
+                  <circle cx="82.7" cy="82.5" r="1.3" fill="#FFFFFF"/>
+                  <circle cx="116" cy="84" r="4.3" fill="#1F1916"/>
+                  <circle cx="114.7" cy="82.5" r="1.3" fill="#FFFFFF"/>
+                  <path d="M96 90 Q100 94 104 90" stroke="#1F1916" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                </svg>
+
+                <div class="call-controls-pill">
+                  <span style="color:#dc2626;font-size:10px;font-weight:700;">◠</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2">
+                    <rect x="9" y="2" width="6" height="11" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  </svg>
+                  <span style="font-size:7px;font-weight:700;border:1.2px solid #111;border-radius:3px;padding:1px 2px;">CC</span>
+                </div>
+              </div>
+
+              <div style="background:#f7f8fa;border-radius:14px;padding:10px 12px;font-size:10.5px;line-height:1.38;color:#111;margin-top:10px;">
+                Found those sneakers you liked, and they're finally back in stock.
+              </div>
+
+              <div class="user-bubbles-group" style="margin-top:10px;margin-right:0;">
+                <div class="chat-bubble-blue" style="font-size:10.5px;">No way!</div>
+                <div class="chat-bubble-blue" style="font-size:10.5px;">Can you order my size?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 3: STAY IN CONTROL OF WHAT YOUR AGENT DOES ================= -->
+    <section class="feature-section bg-white">
+      <div class="feature-container reveal">
+        <!-- Left Stroller Order Visual -->
+        <div class="visual-col">
+          <div class="stroller-scene">
+            <!-- Back Phone Frame -->
+            <div class="stroller-phone-bg">
+              <div style="background:#ffffff;border-radius:14px;padding:8px 14px;display:inline-flex;align-items:center;gap:6px;font-size:10px;color:#65676b;box-shadow:0 4px 12px rgba(0,0,0,0.04);margin-left:38px;">
+                <span>🏷️</span><span id="orderTopChip">Placing an order...</span>
+              </div>
+
+              <div class="chat-bubble-white" style="margin-left:-18px;margin-top:20px;width:268px;">
+                Found a few travel strollers for Luca — perfect for your trip. The Glide Pro is $80 (these usually go for $320). Interested?
+              </div>
+            </div>
+
+            <!-- Front Overlapping Order Approval Modal -->
+            <div class="order-approval-card">
+              <div class="approval-header">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2">
+                  <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                <span>Keepflow wants to place an order at ncvss.com</span>
+              </div>
+
+              <div class="stroller-product-box">
+                <div class="mini-store-nav">
+                  <strong style="color:#111">NovaCruise</strong>
+                  <span>Strollers · Car Seats · Accessories · Sale</span>
+                </div>
+                <div class="stroller-grid">
+                  <div style="background:#fff;border-radius:8px;padding:6px;text-align:center;">
+                    <svg width="74" height="64" viewBox="0 0 80 70" fill="none">
+                      <path d="M58 10 L35 45 L20 45" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+                      <path d="M26 28 L52 48" stroke="#4B5563" stroke-width="2.5"/>
+                      <path d="M22 24 C22 10, 44 10, 46 24 L42 38 L22 36 Z" fill="#1F2937"/>
+                      <path d="M20 36 L44 38 L38 46 L22 45 Z" fill="#111827"/>
+                      <circle cx="22" cy="54" r="7" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+                      <circle cx="48" cy="54" r="8" fill="#111827" stroke="#9CA3AF" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="font-size:8.5px;font-weight:700;color:#111;margin-bottom:2px;">Glide Pro Stroller</div>
+                    <div style="font-size:6px;color:#f59e0b;margin-bottom:4px;">★★★★★ <span style="color:#9ca3af">4.8 (124)</span></div>
+                    <div style="font-size:8px;font-weight:700;color:#111;margin-bottom:5px;">
+                      $80.00 <span style="text-decoration:line-through;color:#9ca3af;font-weight:400;font-size:6.5px;">$320.00</span>
+                    </div>
+                    <div style="display:flex;gap:3px;margin-bottom:6px;">
+                      <span style="width:6px;height:6px;border-radius:50%;background:#1e3a8a;"></span>
+                      <span style="width:6px;height:6px;border-radius:50%;background:#9ca3af;"></span>
+                      <span style="width:6px;height:6px;border-radius:50%;background:#d6d3d1;"></span>
+                    </div>
+                    <div style="background:#0f172a;color:#fff;font-size:5.5px;font-weight:600;text-align:center;padding:3px;border-radius:99px;">ADD TO CART</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="credit-card-row">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="visa-badge">VISA</span>
+                  <span>Virtual Card •••• 1234</span>
+                </div>
+                <span style="color:#9ca3af;">›</span>
+              </div>
+
+              <div class="est-total-row">
+                <span>Estimated total</span>
+                <strong>$80</strong>
+              </div>
+
+              <div id="approvalActionButtons">
+                <button class="btn-allow" onclick="handleOrderDecision('allow')">Allow</button>
+                <button class="btn-deny" onclick="handleOrderDecision('deny')">Deny</button>
+              </div>
+
+              <div id="approvalStatusBanner" class="approval-status-banner"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Copy -->
+        <div class="feature-text right-aligned">
+          <div class="section-eyebrow">Human-in-the-Loop</div>
+          <h2>Stay in control of<br>what your agent does</h2>
+          <p>
+            Approve actions your agent takes on your behalf before they happen, like sending emails and making purchases. See a complete audit trail of everything your agent has done (and what it's planning to do).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 4: YOUR DATA IS KEPT SECURE AND PRIVATE ================= -->
+    <section class="feature-section bg-gray">
+      <div class="feature-container reveal">
+        <!-- Left Copy -->
+        <div class="feature-text left-aligned">
+          <div class="section-eyebrow">Zero-Knowledge Privacy</div>
+          <h2>Your data is kept secure and private</h2>
+          <p>
+            Save your logins to a secure credential store Keepflow can't see, with 1Password integration built in. When shopping, a one-time card number is generated at checkout so your real card stays hidden from the merchant and your agent. Eligible purchases are covered by <a href="#link">Link's purchase protections</a>, a first for AI agents, and your conversations are never used for advertising.
+          </p>
+        </div>
+
+        <!-- Right Credentials Store Card -->
+        <div class="visual-col">
+          <div class="credentials-card">
+            <div class="shield-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L4 5.4V11.4C4 16.8 7.4 21.6 12 23C16.6 21.6 20 16.8 20 11.4V5.4L12 2Z" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round"/>
+                <rect x="9" y="11" width="6" height="5.5" rx="1.2" fill="#0A0A0A"/>
+                <path d="M10.2 11V9.4C10.2 8.4 11 7.6 12 7.6C13 7.6 13.8 8.4 13.8 9.4V11" stroke="#0A0A0A" stroke-width="1.7"/>
+              </svg>
+            </div>
+            <div class="credentials-title" id="credStoreTitle">Secure credentials store</div>
+
+            <div class="cred-input-single">
+              <span>www.example.com</span>
+              <span style="font-size:9px;color:#10b981;font-weight:600;">🔒 TLS 1.3</span>
+            </div>
+
+            <div class="cred-input-double">
+              <div class="row">
+                <span>aadilansari@email.com</span>
+              </div>
+              <div class="row">
+                <span id="credPasswordText" style="letter-spacing: 2px;">••••••••••••</span>
+                <button type="button" class="pw-toggle-btn" onclick="toggleCredentialPw()" id="pwToggleBtn">Show</button>
+              </div>
+            </div>
+
+            <button class="btn-enter" id="credEnterBtn" onclick="lockCredentialVault()">Enter</button>
+            <div class="cred-cancel" onclick="resetCredentialVault()">Cancel</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 5: PROACTIVELY HELPS WITH YOUR GOALS ================= -->
+    <section class="feature-section bg-white">
+      <div class="feature-container reveal">
+        <!-- Left Overlapping Goals & Ideas Cards -->
+        <div class="visual-col">
+          <div class="goals-ideas-wrapper">
+            <!-- Left Goals Card -->
+            <div class="goals-card">
+              <h4>Goals</h4>
+              <div class="goal-item" style="color:#0064e0;font-weight:600;cursor:default;">
+                <span class="goal-radio-active"></span>
+                <span>Goals</span>
+              </div>
+              <div class="goal-item" onclick="toggleGoalItem(this)">
+                <span class="goal-check">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>Monthly Savings Goal</span>
+              </div>
+              <div class="goal-item" onclick="toggleGoalItem(this)">
+                <span class="goal-check">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>Email Calendar Sync</span>
+              </div>
+              <div class="goal-item" onclick="toggleGoalItem(this)">
+                <span class="goal-check">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>Learn to Play Tennis</span>
+              </div>
+              <div class="goal-item completed" onclick="toggleGoalItem(this)">
+                <span class="goal-check">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>World Cup Round 16</span>
+              </div>
+            </div>
+
+            <!-- Right Ideas Card -->
+            <div class="ideas-card">
+              <h4>Ideas</h4>
+
+              <!-- Idea 1 -->
+              <div class="idea-row">
+                <svg class="idea-icon" viewBox="0 0 32 32" fill="none">
+                  <rect x="7" y="5" width="18" height="22" rx="3" transform="rotate(-8 7 5)" fill="#5B7FA6"/>
+                  <rect x="9" y="6" width="16" height="20" rx="2" transform="rotate(-8 9 6)" fill="#789BC0"/>
+                  <line x1="7" y1="9" x2="10" y2="9" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="8" y1="14" x2="11" y2="14" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="19" x2="12" y2="19" stroke="#334155" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div>
+                  <div class="idea-title">I can stage your travel packing lists</div>
+                  <div class="idea-desc">
+                    I can build one trip board for your upcoming travel with clothing picks for the weather and a run down of what's on your calendar.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Idea 2 -->
+              <div class="idea-row">
+                <svg class="idea-icon" viewBox="0 0 32 32" fill="none">
+                  <ellipse cx="19" cy="12" rx="7" ry="9" transform="rotate(35 19 12)" stroke="#A16237" stroke-width="2.2" fill="#F5E6D3" fill-opacity="0.5"/>
+                  <line x1="14" y1="18" x2="6" y2="27" stroke="#854D27" stroke-width="2.8" stroke-linecap="round"/>
+                  <line x1="15" y1="9" x2="23" y2="15" stroke="#D6C2B2" stroke-width="0.8"/>
+                  <line x1="16" y1="15" x2="22" y2="8" stroke="#D6C2B2" stroke-width="0.8"/>
+                </svg>
+                <div>
+                  <div class="idea-title">I can schedule your tennis lessons</div>
+                  <div class="idea-desc">
+                    Share a day that works and I'll email the instructor at City Park, and put the confirmed lesson on your calendar.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Idea 3 -->
+              <div class="idea-row">
+                <svg class="idea-icon" viewBox="0 0 32 32" fill="none">
+                  <polygon points="4,16 18,9 28,15 14,22" fill="#4D7C4D"/>
+                  <polygon points="4,19 18,12 28,18 14,25" fill="#3B623B"/>
+                  <polygon points="10,13 15,10.5 21,14.5 16,17" fill="#E2E8CE"/>
+                  <circle cx="16" cy="15.5" r="2.2" fill="#659B5E"/>
+                </svg>
+                <div>
+                  <div class="idea-title">I can get you money back when a price drops on an item you bought</div>
+                  <div class="idea-desc">
+                    Forward a receipt and I remember it for you. I track that item against the retailer's and your card's price-protection windows.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Copy -->
+        <div class="feature-text right-aligned">
+          <div class="section-eyebrow">Proactive Intelligence</div>
+          <h2>Proactively helps with your goals and suggests ideas</h2>
+          <p>
+            Keepflow helps you stay on top of things, takes tasks and projects off your plate, and turns long-term goals into real progress. It learns from conversations, reflects on what matters and gets sharper, coming back with ideas built around what you actually need, ready to act on them under your direction.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 6: CONNECTS TO YOUR APPS ================= -->
+    <section class="feature-section bg-gray">
+      <div class="feature-container reveal">
+        <!-- Left Copy -->
+        <div class="feature-text left-aligned">
+          <div class="section-eyebrow">Ecosystem & Tool Synthesis</div>
+          <h2>Connects to your apps<br>and builds its own tools</h2>
+          <p>
+            Connect the apps you use daily, like email, calendar, and Instagram. You decide what your agent can see and what it can do. If a task needs a tool that doesn't exist, your agent builds it for you.
+          </p>
+        </div>
+
+        <!-- Right 6x6 App Icons Grid -->
+        <div class="visual-col">
+          <div class="apps-grid">
+            <!-- ROW 1 -->
+            <div class="app-tile blurred" title="Notion" style="background:#475569;"><div style="width:24px;height:24px;border-radius:50%;background:#cbd5e1;"></div></div>
+            <div class="app-tile blurred" title="Figma"><div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#ec4899);"></div></div>
+            <div class="app-tile blurred" title="Messenger"><div style="width:24px;height:24px;border-radius:50%;background:#3b82f6;"></div></div>
+            <div class="app-tile blurred" title="Zapier"><div style="width:20px;height:20px;border-radius:4px;background:#f97316;"></div></div>
+            <div class="app-tile blurred" title="WhatsApp" style="background:#dcfce7;"><div style="width:26px;height:26px;border-radius:6px;background:#86efac;"></div></div>
+            <div class="app-tile blurred" title="iCloud" style="background:#38bdf8;"><div style="width:24px;height:16px;border-radius:8px;background:#fff;"></div></div>
+
+            <!-- ROW 2 -->
+            <div class="app-tile blurred" title="Google Meet"><div style="width:28px;height:14px;border-radius:6px;background:linear-gradient(90deg,#facc15,#4ade80);"></div></div>
+            <div class="app-tile" title="Facebook" style="background:#1877F2;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="#FFFFFF">
+                <path d="M15.12 5.32H17V2.14A26.11 26.11 0 0 0 14.26 2c-2.72 0-4.58 1.66-4.58 4.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V6.65c0-1.05.29-1.73 1.76-1.73Z"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Instagram" style="background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="#FFFFFF" stroke="none"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Gmail">
+              <svg width="32" height="26" viewBox="0 0 32 24" fill="none">
+                <path d="M2 5.5V20C2 21.1 2.9 22 4 22H7V10.5L16 17L25 10.5V22H28C29.1 22 30 21.1 30 20V5.5C30 3.3 27.5 2 25.7 3.3L16 10.5L6.3 3.3C4.5 2 2 3.3 2 5.5Z" fill="#EA4335"/>
+                <path d="M2 5.5V20C2 21.1 2.9 22 4 22H7V10.5L2 6.8V5.5Z" fill="#4285F4"/>
+                <path d="M30 5.5V20C30 21.1 29.1 22 28 22H25V10.5L30 6.8V5.5Z" fill="#34A853"/>
+                <path d="M25 10.5V3.8L25.7 3.3C27.5 2 30 3.3 30 5.5V6.8L25 10.5Z" fill="#FBBC05"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Google Drive">
+              <svg width="32" height="30" viewBox="0 0 32 28" fill="none">
+                <polygon points="11,2 21,2 30,18 20,18" fill="#FBBC05"/>
+                <polygon points="2,18 11,2 16,11 7,26" fill="#4285F4"/>
+                <polygon points="7,26 12,18 30,18 25,26" fill="#34A853"/>
+              </svg>
+            </div>
+            <div class="app-tile blurred" title="1Password"><div style="width:26px;height:26px;border-radius:50%;background:#3b82f6;"></div></div>
+
+            <!-- ROW 3 -->
+            <div class="app-tile blurred" style="background:#60a5fa;"></div>
+            <div class="app-tile" title="Music" style="background:#DB3B3B;">
+              <svg width="32" height="32" viewBox="0 0 32 32">
+                <circle cx="18" cy="17" r="7.5" fill="none" stroke="#FFFFFF" stroke-width="4.5"/>
+                <circle cx="8" cy="12" r="2.2" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Shopify" style="background:#0A0A0A;">
+              <svg width="28" height="30" viewBox="0 0 28 30" fill="none">
+                <path d="M6 8L4 26H24L22 8H6Z" fill="#FFFFFF"/>
+                <path d="M10 8V6C10 3.8 11.8 2 14 2C16.2 2 18 3.8 18 6V8" stroke="#FFFFFF" stroke-width="2"/>
+                <text x="14" y="21" text-anchor="middle" fill="#0A0A0A" font-size="11" font-weight="800" font-family="Inter, sans-serif">S</text>
+              </svg>
+            </div>
+            <div class="app-tile" title="Apple Health">
+              <svg width="26" height="26" viewBox="0 0 24 24" style="transform: translate(4px, -3px);">
+                <defs>
+                  <linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FF6B8B"/>
+                    <stop offset="100%" stop-color="#FF2D55"/>
+                  </linearGradient>
+                </defs>
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#heartGrad)"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Google Docs">
+              <svg width="26" height="32" viewBox="0 0 24 30" fill="none">
+                <path d="M3 3C3 1.34 4.34 0 6 0H15L21 6V27C21 28.66 19.66 30 18 30H6C4.34 30 3 28.66 3 27V3Z" fill="#4285F4"/>
+                <path d="M15 0L21 6H15V0Z" fill="#A1C2FA"/>
+                <line x1="7" y1="13" x2="17" y2="13" stroke="#FFFFFF" stroke-width="2"/>
+                <line x1="7" y1="17" x2="17" y2="17" stroke="#FFFFFF" stroke-width="2"/>
+                <line x1="7" y1="21" x2="13" y2="21" stroke="#FFFFFF" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="app-tile blurred"><div style="width:28px;height:28px;border-radius:50%;background:conic-gradient(#ef4444,#eab308,#22c55e,#3b82f6,#a855f7);"></div></div>
+
+            <!-- ROW 4 -->
+            <div class="app-tile blurred"><div style="width:22px;height:26px;background:#3b82f6;border-radius:4px;"></div></div>
+            <div class="app-tile" title="Ticketmaster" style="background:#026CDF;">
+              <span style="color:#FFFFFF;font-size:32px;font-weight:700;font-style:italic;font-family:Georgia, serif;line-height:1;">t</span>
+            </div>
+            <div class="app-tile" title="Peloton" style="background:#0A0A0A;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <circle cx="15" cy="11" r="6" stroke="#FFFFFF" stroke-width="2.6"/>
+                <circle cx="15" cy="11" r="2" fill="#FFFFFF"/>
+                <line x1="9" y1="11" x2="6" y2="23" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/>
+                <line x1="17" y1="5" x2="19" y2="2" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Keepflow Custom Tool" style="background:#111B2B;">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <polygon points="8,6 15,6 9,22 5,22" fill="#E59842"/>
+                <polygon points="16,6 23,6 17,22 12,22" fill="#E59842"/>
+                <line x1="5" y1="14" x2="23" y2="14" stroke="#111B2B" stroke-width="2.2"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Web Browser">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9.5"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="9.5"/>
+                <line x1="2.5" y1="12" x2="21.5" y2="12"/>
+                <line x1="4" y1="7.5" x2="20" y2="7.5"/>
+                <line x1="4" y1="16.5" x2="20" y2="16.5"/>
+              </svg>
+            </div>
+            <div class="app-tile blurred"><div style="width:26px;height:26px;border-radius:50%;background:#334155;"></div></div>
+
+            <!-- ROW 5 -->
+            <div class="app-tile blurred" style="background:#334155;"></div>
+            <div class="app-tile" title="Google Calendar">
+              <div style="width:32px;height:32px;background:#3B82F6;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;">31</div>
+            </div>
+            <div class="app-tile" title="Resy / Dining" style="background:#FAF8F5;">
+              <svg width="30" height="30" viewBox="0 0 30 30">
+                <circle cx="15" cy="15" r="12" fill="#9A5B3E"/>
+                <path d="M5 10 L25 16 M4 14 L26 20 M6 18 L24 24 M8 22 L20 26" stroke="#FAF8F5" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Keepflow Actions" style="background:#00D659;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M7 4L17 12L7 20" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="app-tile" title="Workflows" style="background:linear-gradient(145deg, #2D3E50, #0F1A26);">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6">
+                <rect x="6" y="6" width="12" height="12" rx="3" transform="rotate(45 12 12)"/>
+                <rect x="6" y="6" width="12" height="12" rx="3"/>
+                <circle cx="12" cy="12" r="2.5"/>
+              </svg>
+            </div>
+            <div class="app-tile blurred" style="background:#38bdf8;"></div>
+
+            <!-- ROW 6 -->
+            <div class="app-tile blurred"><div style="width:24px;height:24px;border-radius:50%;background:#3b82f6;"></div></div>
+            <div class="app-tile blurred" style="background:#27272a;"></div>
+            <div class="app-tile blurred" style="background:#84cc16;"></div>
+            <div class="app-tile blurred"><div style="width:24px;height:24px;border-radius:50%;background:#475569;"></div></div>
+            <div class="app-tile blurred" style="background:#52525b;"></div>
+            <div class="app-tile blurred"><div style="width:22px;height:22px;border-radius:4px;background:#fb923c;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 7: GET THE MOST OUT OF YOUR KEEPFLOW ================= -->
+    <section class="tour-section reveal">
+      <h2>Get the most out of your Keepflow</h2>
+      <p>A guided tour of Keepflow, from setting a first goal to seeing it through.</p>
+
+      <!-- Interactive Chapter Pills -->
+      <div class="tour-chapters">
+        <button class="chapter-pill active" onclick="switchTourChapter(0, this)">01 · Setting a first goal</button>
+        <button class="chapter-pill" onclick="switchTourChapter(1, this)">02 · Cloud VM in action</button>
+        <button class="chapter-pill" onclick="switchTourChapter(2, this)">03 · One-tap approvals</button>
+      </div>
+
+      <!-- Rounded Studio Video Showcase Card -->
+      <div class="tour-video-card" onclick="playGuidedTour()">
+        <svg width="100%" height="100%" viewBox="0 0 1120 540" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="wallBg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2c251d"/>
+              <stop offset="50%" stop-color="#5c5346"/>
+              <stop offset="100%" stop-color="#2a2621"/>
+            </linearGradient>
+            <linearGradient id="tableSurface" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8b8378"/>
+              <stop offset="100%" stop-color="#aba398"/>
+            </linearGradient>
+          </defs>
+          <rect width="1120" height="540" fill="url(#wallBg)"/>
+          <rect x="315" y="40" width="160" height="360" fill="#826546" opacity="0.55"/>
+          <circle cx="385" cy="400" r="55" fill="#9c9488" opacity="0.5"/>
+          <path d="M475 260 C475 180, 645 180, 645 260 L665 430 L455 430 Z" fill="#d97724"/>
+          <polygon points="80,415 1040,415 1120,540 0,540" fill="url(#tableSurface)"/>
+          <ellipse cx="560" cy="445" rx="140" ry="22" fill="#4a3f35" opacity="0.35"/>
+          <path d="M495 390 C505 385, 535 415, 535 445 C535 462, 512 465, 498 442 Z" fill="#c6906b"/>
+          <path d="M625 390 C635 405, 622 448, 590 448 C568 448, 565 422, 595 405 Z" fill="#d49e7a"/>
+          <rect x="562" y="388" width="52" height="24" rx="4" transform="rotate(-14 562 388)" fill="#1f2937" stroke="#9ca3af" stroke-width="1.5"/>
+        </svg>
+
+        <div class="video-overlay-play">
+          <div class="play-circle-btn" id="tourPlayIcon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#0A0A0A" style="margin-left:3px;">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="video-caption-bar">
+          <span id="tourCaptionTitle">Chapter 01 — Delegating your weekly schedule and travel logistics to Keepflow</span>
+          <span style="opacity:0.8;">2:14 · HD</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 8: LEARN MORE ABOUT KEEPFLOW ================= -->
+    <section class="learn-more-section">
+      <div class="learn-more-container reveal">
+        <!-- Left Heading -->
+        <div class="learn-more-left">
+          <h2>Learn more about Keepflow</h2>
+          <p>Explore the choices behind Keepflow and how it is built to deserve your trust.</p>
+        </div>
+
+        <!-- Right 3-Item List -->
+        <div class="learn-list">
+          <!-- Item 1 -->
+          <div class="learn-item" onclick="this.classList.toggle('expanded')">
+            <div class="learn-item-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                <path d="m15 5 4 4"/>
+              </svg>
+            </div>
+            <div class="learn-item-body">
+              <h3>How We Designed Keepflow</h3>
+              <p>When Keepflow works, it feels like magic. These are the product choices that make the experience possible.</p>
+              <div class="learn-item-detail">
+                We designed Keepflow around calm, asynchronous delegation: instead of forcing you to prompt-engineer every step, Keepflow observes context, drafts complete execution plans inside its own cloud browser, and surfaces concise approval cards only when needed.
+              </div>
+            </div>
+            <div class="learn-item-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="learn-item" onclick="this.classList.toggle('expanded')">
+            <div class="learn-item-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <div class="learn-item-body">
+              <h3>How We Built Safety Into Keepflow</h3>
+              <p>Keepflow is built for privacy, safety, and security. Learn how these principles shape every part of the product.</p>
+              <div class="learn-item-detail">
+                Every user gets a hardware-isolated Linux sandbox, zero-knowledge credential injection that prevents the model from seeing raw passwords, and cryptographically signed human-in-the-loop checkpoints before any external transaction or message leaves your account.
+              </div>
+            </div>
+            <div class="learn-item-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="learn-item" onclick="this.classList.toggle('expanded')">
+            <div class="learn-item-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="learn-item-body">
+              <h3>Keepflow for Business</h3>
+              <p>Meet the AI agent that works for your small business and keeps jobs moving between your decisions.</p>
+              <div class="learn-item-detail">
+                From reconciling vendor invoices and following up on client estimates to coordinating team calendars across WhatsApp and Slack, Keepflow for Business keeps your operations running smoothly 24/7.
+              </div>
+            </div>
+            <div class="learn-item-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION 9: READY TO TRY KEEPFLOW? WAITLIST CTA ================= -->
+    <section id="waitlist" class="cta-section">
+      <div class="cta-card-container reveal">
+        <h2>Ready to try Keepflow?</h2>
+        <p class="cta-subtitle">Reserve your spot on the waitlist for early access to your personal cloud agent.</p>
+
+        <!-- Role / Use-case Selector Chips -->
+        <div class="role-selector">
+          <button type="button" class="role-chip selected" onclick="selectRoleChip(this)">Personal & Life</button>
+          <button type="button" class="role-chip" onclick="selectRoleChip(this)">Founder & Executive</button>
+          <button type="button" class="role-chip" onclick="selectRoleChip(this)">Small Business</button>
+        </div>
+
+        <!-- Bottom Waitlist Bar -->
+        <form class="waitlist-bar" id="bottomWaitlistForm" onsubmit="handleInlineWaitlist(event, 'bottom')">
+          <input type="email" id="bottomEmailInput" placeholder="Enter your work or personal email..." required />
+          <button type="submit" class="btn-waitlist-submit">Join waitlist</button>
+        </form>
+
+        <div class="waitlist-success-inline" id="bottomWaitlistSuccess">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <span id="bottomSuccessText">Spot #14,821 reserved! Check your inbox for your priority referral link.</span>
+        </div>
+
+        <div class="cta-secondary-login">
+          Already have an invite code? <a href="#login" onclick="openWaitlistModal('login'); return false;">Log in to Keepflow →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ================= WAITLIST / LOGIN MODAL ================= -->
+  <div class="modal-backdrop" id="waitlistModalBackdrop" onclick="if(event.target === this) closeWaitlistModal()">
+    <div class="waitlist-modal">
+      <button class="modal-close" onclick="closeWaitlistModal()" aria-label="Close">×</button>
+
+      <div style="display:inline-flex;margin-bottom:16px;">
+        <span class="keepflow-icon-box" style="width:42px;height:42px;border-radius:12px;">
+          <svg width="30" height="27" viewBox="0 0 112 100" fill="#0064E0" aria-hidden="true">
+            <path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/>
+            <rect x="61" y="18" width="14" height="14" rx="4"/><rect x="82" y="22" width="14" height="14" rx="4"/>
+            <rect x="61" y="43" width="14" height="14" rx="4"/><rect x="82" y="43" width="14" height="14" rx="4"/><rect x="103" y="39" width="9" height="14" rx="4"/>
+            <rect x="61" y="68" width="14" height="14" rx="4"/><rect x="82" y="64" width="14" height="14" rx="4"/>
+          </svg>
+        </span>
+      </div>
+
+      <h3 id="modalHeading" style="font-size:24px;margin-bottom:8px;">Join the Keepflow Waitlist</h3>
+      <p id="modalSubheading" style="font-size:14px;color:var(--text-secondary);margin-bottom:22px;line-height:1.5;">
+        We’re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.
+      </p>
+
+      <form id="modalForm" onsubmit="handleModalSubmit(event)">
+        <input type="email" id="modalEmail" class="modal-input" placeholder="you@domain.com" required />
+        <input type="text" id="modalCode" class="modal-input" placeholder="Optional: Invite or referral code" />
+        <button type="submit" class="btn-modal-submit" id="modalSubmitBtn">Reserve my spot</button>
+      </form>
+
+      <div id="modalConfirmation" style="display:none;margin-top:12px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:16px;color:#166534;font-size:13.5px;font-weight:600;">
+        🎉 You’re on the list! Your referral link: <br>
+        <code style="display:inline-block;margin-top:6px;padding:4px 10px;background:#fff;border-radius:6px;color:#0a0a0a;font-size:12px;">keepflow.ai/?ref=early-flow</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© Keepflow Inc. 2026</div>
+
+      <div class="footer-links" aria-label="Legal pages">
+        <button type="button" onclick="location.href='privacy.html'">Privacy Policy</button>
+        <button type="button" onclick="location.href='security.html'">Security</button>
+        <button type="button" onclick="location.href='cookies.html'">Cookies</button>
+        <button type="button" onclick="location.href='terms.html'">Terms</button>
+      </div>
+
+      <div class="footer-from-keepflow">
+        <span>crafted by</span>
+        <strong>
+          <span class="keepflow-icon-box" style="width:18px;height:18px;border-radius:5px;">
+            <svg width="14" height="12" viewBox="0 0 112 100" fill="#0064E0" aria-hidden="true">
+              <path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/>
+              <rect x="61" y="18" width="14" height="14" rx="4"/><rect x="82" y="22" width="14" height="14" rx="4"/>
+              <rect x="61" y="43" width="14" height="14" rx="4"/><rect x="82" y="43" width="14" height="14" rx="4"/><rect x="103" y="39" width="9" height="14" rx="4"/>
+              <rect x="61" y="68" width="14" height="14" rx="4"/><rect x="82" y="64" width="14" height="14" rx="4"/>
+            </svg>
+          </span>
+          Keepflow
+        </strong>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE SCRIPTS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" crossorigin="anonymous"></script>
+  <script>
+    // Supabase waitlist (publishable key is safe for client use only with proper RLS/policies)
+    const SUPABASE_URL = 'https://tppsxyfsovlawijtnbeq.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_rXXTukON2FEGbyuSeMgAig_0PdN2Ku7';
+    const SUPABASE_WAITLIST_TABLE = 'waitlist';
+    const supabaseClient = (window.supabase && SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY)
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+      : null;
+
+    function getSelectedRole() {
+      const chip = document.querySelector('.role-chip.selected');
+      return chip ? chip.textContent.trim() : null;
+    }
+
+    async function submitWaitlistToSupabase(payload) {
+      if (!supabaseClient) return { ok: false, error: { message: 'Waitlist is not configured.' } };
+      const { error } = await supabaseClient.from(SUPABASE_WAITLIST_TABLE).insert([payload]);
+      if (!error) return { ok: true };
+      const msg = (error.message || '').toLowerCase();
+      const code = String(error.code || '');
+      if (code === '23505' || msg.includes('duplicate') || msg.includes('unique') || msg.includes('already')) {
+        return { ok: true, duplicate: true };
+      }
+      return { ok: false, error };
+    }
+
+    function showWaitlistError(message) {
+      window.alert(message || 'Could not save your spot right now. Please try again.');
+    }
+
+    // Navbar scroll elevation
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 12) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal observer
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Waitlist (Supabase-connected)
+    let modalMode = 'waitlist';
+
+    async function handleInlineWaitlist(e, source) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const btn = form.querySelector('button[type="submit"]');
+      const email = (form.querySelector('input[type="email"]')?.value || '').trim().toLowerCase();
+      if (!email) return;
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Saving...'; }
+      const payload = {
+        email,
+        source: source || 'site',
+        role: getSelectedRole(),
+        page: location.pathname + location.hash
+      };
+      const result = await submitWaitlistToSupabase(payload);
+      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Join waitlist'; }
+      if (!result.ok) { showWaitlistError(result.error && result.error.message); return; }
+
+      form.style.display = 'none';
+      const successId = source === 'hero' ? 'heroWaitlistSuccess' : 'bottomWaitlistSuccess';
+      const textId = source === 'hero' ? 'heroSuccessText' : 'bottomSuccessText';
+      const banner = document.getElementById(successId);
+      const text = document.getElementById(textId);
+      if (text) text.textContent = result.duplicate
+        ? `You're already on the list, ${email}. We'll be in touch.`
+        : `You're on the Keepflow waitlist, ${email}. We'll email you when your spot is ready.`;
+      if (banner) banner.style.display = 'inline-flex';
+    }
+
+    // Role Chip Selection
+    function selectRoleChip(btn) {
+      document.querySelectorAll('.role-chip').forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    // Waitlist / Login Modal
+    function openWaitlistModal(mode) {
+      modalMode = mode || 'waitlist';
+      const backdrop = document.getElementById('waitlistModalBackdrop');
+      const heading = document.getElementById('modalHeading');
+      const subheading = document.getElementById('modalSubheading');
+      const codeInput = document.getElementById('modalCode');
+      const submitBtn = document.getElementById('modalSubmitBtn');
+      document.getElementById('modalForm').style.display = 'block';
+      document.getElementById('modalConfirmation').style.display = 'none';
+
+      if (modalMode === 'login') {
+        heading.textContent = 'Log in to Keepflow';
+        subheading.textContent = 'Invite-based access is rolling out in batches. If you have an invite, join the waitlist with the same email and we’ll match your code when access opens.';
+        codeInput.placeholder = 'Invite or referral code (optional)';
+        submitBtn.textContent = 'Request access';
+      } else {
+        heading.textContent = 'Join the Keepflow Waitlist';
+        subheading.textContent = 'We’re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.';
+        codeInput.placeholder = 'Optional: Invite or referral code';
+        submitBtn.textContent = 'Reserve my spot';
+      }
+      backdrop.classList.add('open');
+    }
+
+    function closeWaitlistModal() {
+      document.getElementById('waitlistModalBackdrop').classList.remove('open');
+    }
+
+    async function handleModalSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('modalSubmitBtn');
+      const email = (document.getElementById('modalEmail')?.value || '').trim().toLowerCase();
+      const invite = (document.getElementById('modalCode')?.value || '').trim();
+      if (!email) return;
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Saving...'; }
+      const payload = {
+        email,
+        source: modalMode === 'login' ? 'modal-login' : 'modal-waitlist',
+        invite_code: invite || null,
+        role: getSelectedRole(),
+        page: location.pathname + location.hash
+      };
+      const result = await submitWaitlistToSupabase(payload);
+      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Submit'; }
+      if (!result.ok) { showWaitlistError(result.error && result.error.message); return; }
+      document.getElementById('modalForm').style.display = 'none';
+      const conf = document.getElementById('modalConfirmation');
+      if (conf) {
+        conf.style.display = 'block';
+        conf.innerHTML = result.duplicate
+          ? `You’re already on the list for <strong>${email}</strong>. We’ll be in touch.`
+          : `🎉 You’re on the list, <strong>${email}</strong>. We’ll email you when your spot is ready.`;
+      }
+    }
+
+    // Section 1: Interactive Movie Seat Picker
+    document.querySelectorAll('#interactiveSeatMap .seat.avail, #interactiveSeatMap .seat.selected').forEach(seat => {
+      seat.addEventListener('click', () => {
+        if (seat.classList.contains('selected')) {
+          seat.classList.remove('selected');
+          seat.classList.add('avail');
+        } else {
+          seat.classList.remove('avail');
+          seat.classList.add('selected');
+        }
+        const selectedSeats = Array.from(document.querySelectorAll('#interactiveSeatMap .seat.selected'))
+          .map(s => s.getAttribute('data-seat'));
+        const statusEl = document.getElementById('seatStatusText');
+        if (selectedSeats.length > 0) {
+          statusEl.textContent = `Selecting ${selectedSeats.length} seat${selectedSeats.length > 1 ? 's' : ''} (${selectedSeats.join(', ')})...`;
+        } else {
+          statusEl.textContent = 'Click any available seat to select...';
+        }
+      });
+    });
+
+    function toggleVmPreview() {
+      const btn = document.getElementById('openVmBtn');
+      if (btn.dataset.connected === 'true') {
+        btn.dataset.connected = 'false';
+        btn.textContent = 'Open browser';
+        btn.style.background = '#f2f3f5';
+        btn.style.color = '#111';
+      } else {
+        btn.dataset.connected = 'true';
+        btn.textContent = '✓ Connected to Keepflow Linux VM · Checkout ready';
+        btn.style.background = '#e6f0ff';
+        btn.style.color = '#005bb5';
+      }
+    }
+
+    // Section 2: Interactive Permission Slip Send
+    let slipSent = false;
+    function triggerSendPermissionSlip() {
+      if (slipSent) return;
+      slipSent = true;
+      const stream = document.getElementById('fieldTripChatStream');
+      const userSendBubble = document.createElement('div');
+      userSendBubble.className = 'chat-bubble-blue';
+      userSendBubble.textContent = 'Send it';
+      stream.appendChild(userSendBubble);
+
+      document.getElementById('sendItText').textContent = 'Sent to school office ✓';
+      document.getElementById('pdfSubStatus').textContent = 'PDF · Signed & emailed ✓';
+
+      setTimeout(() => {
+        document.getElementById('typingIndicatorPill').style.display = 'none';
+        const reply = document.createElement('div');
+        reply.className = 'chat-bubble-white';
+        reply.style.width = '230px';
+        reply.style.marginLeft = '-22px';
+        reply.style.marginTop = '8px';
+        reply.textContent = 'Done! Signed and emailed to Lincoln Middle School. Added a reminder for Friday.';
+        stream.parentNode.insertBefore(reply, document.getElementById('sendItBar'));
+      }, 650);
+    }
+
+    // Section 3: Interactive Stroller Order Approval
+    function handleOrderDecision(decision) {
+      const buttonsBox = document.getElementById('approvalActionButtons');
+      const banner = document.getElementById('approvalStatusBanner');
+      const topChip = document.getElementById('orderTopChip');
+      buttonsBox.style.display = 'none';
+      banner.style.display = 'block';
+
+      if (decision === 'allow') {
+        banner.style.background = '#ecfdf5';
+        banner.style.color = '#065f46';
+        banner.innerHTML = '✓ Approved · Order placed with virtual card •••• 1234 <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Undo / Reset demo</span>';
+        topChip.textContent = 'Order confirmed (#NC-8492)';
+      } else {
+        banner.style.background = '#fef2f2';
+        banner.style.color = '#991b1b';
+        banner.innerHTML = '✕ Action denied · Keepflow canceled checkout <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Reset demo</span>';
+        topChip.textContent = 'Order canceled by user';
+      }
+    }
+
+    function resetOrderDecision() {
+      document.getElementById('approvalActionButtons').style.display = 'block';
+      document.getElementById('approvalStatusBanner').style.display = 'none';
+      document.getElementById('orderTopChip').textContent = 'Placing an order...';
+    }
+
+    // Section 4: Secure Credentials Store Toggle
+    let pwVisible = false;
+    function toggleCredentialPw() {
+      pwVisible = !pwVisible;
+      const pwEl = document.getElementById('credPasswordText');
+      const btn = document.getElementById('pwToggleBtn');
+      if (pwVisible) {
+        pwEl.textContent = 'kF9#mP2$vL8x';
+        pwEl.style.letterSpacing = '0.5px';
+        btn.textContent = 'Hide';
+      } else {
+        pwEl.textContent = '••••••••••••';
+        pwEl.style.letterSpacing = '2px';
+        btn.textContent = 'Show';
+      }
+    }
+
+    function lockCredentialVault() {
+      const btn = document.getElementById('credEnterBtn');
+      btn.textContent = '✓ Encrypted in Zero-Knowledge Vault';
+      btn.style.background = '#10b981';
+    }
+
+    function resetCredentialVault() {
+      const btn = document.getElementById('credEnterBtn');
+      btn.textContent = 'Enter';
+      btn.style.background = 'var(--keep-blue-bright)';
+    }
+
+    // Section 5: Interactive Goals Checklist
+    function toggleGoalItem(item) {
+      item.classList.toggle('completed');
+    }
+
+    // Section 7: Guided Tour Chapters
+    const chapters = [
+      'Chapter 01 — Delegating your weekly schedule and travel logistics to Keepflow',
+      'Chapter 02 — Watching Keepflow research and compare flights inside your Cloud VM',
+      'Chapter 03 — Approving purchases safely with one-time virtual cards'
+    ];
+
+    function switchTourChapter(index, btn) {
+      document.querySelectorAll('.chapter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tourCaptionTitle').textContent = chapters[index];
+    }
+
+    function playGuidedTour() {
+      const titleEl = document.getElementById('tourCaptionTitle');
+      if (!titleEl.textContent.startsWith('▶ Playing:')) {
+        titleEl.textContent = '▶ Playing: ' + titleEl.textContent;
+      }
+    }
+
+  </script>
+</body>
+</html>
