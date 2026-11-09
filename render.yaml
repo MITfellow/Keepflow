@@ -8,3 +8,28 @@ services:
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
+    routes:
+      - type: rewrite
+        source: /product
+        destination: /product.html
+      - type: rewrite
+        source: /how-it-works
+        destination: /how-it-works.html
+      - type: rewrite
+        source: /use-cases
+        destination: /use-cases.html
+      - type: rewrite
+        source: /blog
+        destination: /blog.html
+      - type: rewrite
+        source: /privacy
+        destination: /privacy.html
+      - type: rewrite
+        source: /terms
+        destination: /terms.html
+      - type: rewrite
+        source: /cookies
+        destination: /cookies.html
+      - type: rewrite
+        source: /security
+        destination: /security.html

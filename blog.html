@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeepFlow Blog — AI Agent Research and Tutorials</title>
+  <meta name="description" content="KeepFlow research, tutorials, and updates about personal AI agents, workflows, privacy, and product development." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 100'%3E%3Cg fill='%230064E0'%3E%3Cpath d='M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z'/%3E%3Crect x='61' y='18' width='14' height='14' rx='4'/%3E%3Crect x='82' y='22' width='14' height='14' rx='4'/%3E%3Crect x='61' y='43' width='14' height='14' rx='4'/%3E%3Crect x='82' y='43' width='14' height='14' rx='4'/%3E%3Crect x='103' y='39' width='9' height='14' rx='4'/%3E%3Crect x='61' y='68' width='14' height='14' rx='4'/%3E%3Crect x='82' y='64' width='14' height='14' rx='4'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .sub-hero { padding: 96px 24px 56px; text-align: center; background: linear-gradient(180deg,#f8fbff 0%,#fff 100%); border-bottom: 1px solid rgba(0,0,0,.05); }
+    .sub-hero .eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--keep-blue-bright); margin-bottom:14px; }
+    .sub-hero h1 { font-family:"Plus Jakarta Sans",sans-serif; font-size:clamp(34px,5vw,52px); letter-spacing:-.03em; margin:0 0 14px; }
+    .sub-hero p { max-width:720px; margin:0 auto; color:var(--text-secondary); font-size:17px; line-height:1.65; }
+    .page-section { max-width:920px; margin:0 auto; padding:56px 24px 80px; }
+    .empty { background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:22px; padding:32px 28px; box-shadow:var(--shadow-soft); text-align:center; }
+    .empty h2 { font-family:"Plus Jakarta Sans",sans-serif; margin:0 0 10px; font-size:26px; }
+    .empty p { margin:0 auto; max-width:620px; color:var(--text-secondary); line-height:1.7; }
+    .topics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:22px; text-align:left; }
+    .topic { background:#f7f9fc; border:1px solid rgba(0,0,0,.05); border-radius:14px; padding:14px 15px; }
+    .topic strong { display:block; font-size:14px; margin-bottom:4px; }
+    .topic span { color:var(--text-secondary); font-size:13.5px; line-height:1.55; }
+    @media (max-width:860px){ .topics { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="keepflow-brand" aria-label="KeepFlow home">
+        <span class="keepflow-icon-box"><svg width="20" height="18" viewBox="0 0 112 100" fill="#0064E0" aria-hidden="true"><path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/><rect x="61" y="18" width="14" height="14" rx="4"/><rect x="82" y="22" width="14" height="14" rx="4"/><rect x="61" y="43" width="14" height="14" rx="4"/><rect x="82" y="43" width="14" height="14" rx="4"/><rect x="103" y="39" width="9" height="14" rx="4"/><rect x="61" y="68" width="14" height="14" rx="4"/><rect x="82" y="64" width="14" height="14" rx="4"/></svg></span>
+        <span>KeepFlow</span>
+      </a>
+      <nav class="nav-actions" aria-label="Primary">
+        <a href="/product.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">Product</a>
+        <a href="/how-it-works.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">How it works</a>
+        <a href="/use-cases.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">Use cases</a>
+        <a href="/#waitlist" class="btn-primary-black">Join early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <section class="sub-hero">
+      <div class="eyebrow">Blog</div>
+      <h1>AI agent research and tutorials</h1>
+      <p>Updates, practical guides, and research notes about personal AI agents — focused on useful workflows, safety, and clear product design.</p>
+    </section>
+
+    <section class="page-section">
+      <div class="empty">
+        <h2>Coming soon</h2>
+        <p>We haven’t published posts yet. When we do, this page will include practical tutorials, product updates, and research-informed writing about how personal AI agents can help with everyday work while respecting privacy and user control.</p>
+        <div class="topics" aria-label="Planned topics">
+          <div class="topic"><strong>Tutorials</strong><span>How to delegate everyday tasks safely and review agent output.</span></div>
+          <div class="topic"><strong>Research notes</strong><span>What works, what fails, and how to evaluate AI agent workflows.</span></div>
+          <div class="topic"><strong>Product updates</strong><span>Early access progress, design decisions, and capability changes.</span></div>
+        </div>
+        <p style="margin-top:22px;"><a href="/#waitlist" class="btn-primary-black" style="display:inline-flex;">Join early access for updates</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© KeepFlow Inc. 2026</div>
+      <div class="footer-links" aria-label="Site and legal pages">
+        <button type="button" onclick="location.href='/product.html'">Product</button>
+        <button type="button" onclick="location.href='/how-it-works.html'">How it works</button>
+        <button type="button" onclick="location.href='/use-cases.html'">Use cases</button>
+        <button type="button" onclick="location.href='/privacy.html'">Privacy</button>
+        <button type="button" onclick="location.href='/terms.html'">Terms</button>
+      </div>
+      <div class="footer-from-keepflow"><strong>KeepFlow</strong></div>
+    </div>
+  </footer>
+  <script>window.addEventListener('scroll',()=>{document.getElementById('navbar')?.classList.toggle('scrolled',window.scrollY>10)});</script>
+</body>
+</html>

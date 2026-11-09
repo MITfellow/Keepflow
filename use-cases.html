@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeepFlow Use Cases — AI Agents for Everyday Tasks</title>
+  <meta name="description" content="Examples of how a KeepFlow personal AI agent can help with everyday tasks like planning, research, drafting, scheduling, and follow-ups." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 100'%3E%3Cg fill='%230064E0'%3E%3Cpath d='M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z'/%3E%3Crect x='61' y='18' width='14' height='14' rx='4'/%3E%3Crect x='82' y='22' width='14' height='14' rx='4'/%3E%3Crect x='61' y='43' width='14' height='14' rx='4'/%3E%3Crect x='82' y='43' width='14' height='14' rx='4'/%3E%3Crect x='103' y='39' width='9' height='14' rx='4'/%3E%3Crect x='61' y='68' width='14' height='14' rx='4'/%3E%3Crect x='82' y='64' width='14' height='14' rx='4'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .sub-hero { padding: 96px 24px 56px; text-align: center; background: linear-gradient(180deg,#f8fbff 0%,#fff 100%); border-bottom: 1px solid rgba(0,0,0,.05); }
+    .sub-hero .eyebrow { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--keep-blue-bright); margin-bottom:14px; }
+    .sub-hero h1 { font-family:"Plus Jakarta Sans",sans-serif; font-size:clamp(34px,5vw,52px); letter-spacing:-.03em; margin:0 0 14px; }
+    .sub-hero p { max-width:720px; margin:0 auto; color:var(--text-secondary); font-size:17px; line-height:1.65; }
+    .page-section { max-width:1040px; margin:0 auto; padding:56px 24px; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:22px; }
+    .card { background:#fff; border:1px solid rgba(0,0,0,.07); border-radius:18px; padding:22px; box-shadow:var(--shadow-soft); }
+    .card h3 { font-family:"Plus Jakarta Sans",sans-serif; font-size:18px; margin:0 0 8px; }
+    .card p, .card li { color:var(--text-secondary); font-size:14.5px; line-height:1.65; }
+    .label { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#5b6472; background:#f3f5f8; border-radius:999px; padding:4px 8px; margin-bottom:10px; }
+    .card ul { margin:10px 0 0 18px; display:grid; gap:6px; }
+    .note { margin-top:18px; padding:14px 16px; border-radius:14px; background:#fff8e8; border:1px solid rgba(180,120,0,.18); color:#5f4700; font-size:13.5px; }
+    .cta-band { margin:8px 24px 72px; max-width:1040px; margin-left:auto; margin-right:auto; background:#0a0a0a; color:#fff; border-radius:22px; padding:28px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+    .cta-band h2 { font-family:"Plus Jakarta Sans",sans-serif; font-size:24px; margin:0 0 4px; }
+    .cta-band p { margin:0; color:rgba(255,255,255,.72); }
+    @media (max-width:860px){ .grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="/" class="keepflow-brand" aria-label="KeepFlow home">
+        <span class="keepflow-icon-box"><svg width="20" height="18" viewBox="0 0 112 100" fill="#0064E0" aria-hidden="true"><path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/><rect x="61" y="18" width="14" height="14" rx="4"/><rect x="82" y="22" width="14" height="14" rx="4"/><rect x="61" y="43" width="14" height="14" rx="4"/><rect x="82" y="43" width="14" height="14" rx="4"/><rect x="103" y="39" width="9" height="14" rx="4"/><rect x="61" y="68" width="14" height="14" rx="4"/><rect x="82" y="64" width="14" height="14" rx="4"/></svg></span>
+        <span>KeepFlow</span>
+      </a>
+      <nav class="nav-actions" aria-label="Primary">
+        <a href="/product.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">Product</a>
+        <a href="/how-it-works.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">How it works</a>
+        <a href="/use-cases.html" style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-right:8px;">Use cases</a>
+        <a href="/#waitlist" class="btn-primary-black">Join early access</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrapper">
+    <section class="sub-hero">
+      <div class="eyebrow">Use cases</div>
+      <h1>AI agents for everyday tasks</h1>
+      <p>These examples show the kinds of everyday work KeepFlow is being designed to help with. They are illustrative scenarios, not claims about completed production features.</p>
+    </section>
+
+    <section class="page-section">
+      <div class="grid-2">
+        <article class="card">
+          <span class="label">Illustrative example</span>
+          <h3>Plan a trip</h3>
+          <p><strong>Goal:</strong> “Find flight and hotel options for a weekend trip under my budget.”</p>
+          <ul>
+            <li>Collect preferences, dates, and budget constraints</li>
+            <li>Compare options and highlight tradeoffs</li>
+            <li>Prepare a shortlist for your review before any booking</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="label">Illustrative example</span>
+          <h3>Handle follow-ups</h3>
+          <p><strong>Goal:</strong> “Draft replies and organize what needs attention this week.”</p>
+          <ul>
+            <li>Summarize messages or notes you provide</li>
+            <li>Draft responses in your preferred tone</li>
+            <li>Ask for approval before sending anything</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="label">Illustrative example</span>
+          <h3>Research a purchase</h3>
+          <p><strong>Goal:</strong> “Help me choose between a few options and explain why.”</p>
+          <ul>
+            <li>Compare features, total cost, and constraints</li>
+            <li>Surface key pros, cons, and unknowns</li>
+            <li>Prepare a decision summary — no purchase without approval</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span class="label">Illustrative example</span>
+          <h3>Organize a project</h3>
+          <p><strong>Goal:</strong> “Turn this rough idea into a plan I can act on.”</p>
+          <ul>
+            <li>Break work into steps and priorities</li>
+            <li>Draft checklists, timelines, or documents</li>
+            <li>Track open questions and next actions</li>
+          </ul>
+        </article>
+      </div>
+      <div class="note"><strong>Honesty note:</strong> These are sample workflows to explain the product direction. KeepFlow is in early access; real integrations, permissions, and results will depend on the features you enable and approve.</div>
+    </section>
+
+    <section class="cta-band">
+      <div><h2>Want KeepFlow for your everyday tasks?</h2><p>Join the early access list.</p></div>
+      <a href="/#waitlist" class="btn-primary-white">Join early access</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© KeepFlow Inc. 2026</div>
+      <div class="footer-links" aria-label="Site and legal pages">
+        <button type="button" onclick="location.href='/product.html'">Product</button>
+        <button type="button" onclick="location.href='/how-it-works.html'">How it works</button>
+        <button type="button" onclick="location.href='/use-cases.html'">Use cases</button>
+        <button type="button" onclick="location.href='/privacy.html'">Privacy</button>
+        <button type="button" onclick="location.href='/terms.html'">Terms</button>
+      </div>
+      <div class="footer-from-keepflow"><strong>KeepFlow</strong></div>
+    </div>
+  </footer>
+  <script>window.addEventListener('scroll',()=>{document.getElementById('navbar')?.classList.toggle('scrolled',window.scrollY>10)});</script>
+</body>
+</html>
