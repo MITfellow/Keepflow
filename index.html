@@ -1,16 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KeepFlow — Personal AI Agent for Everyday Tasks</title>
-  <meta name="description" content="KeepFlow is a personal AI agent that helps with planning, research, drafts, and tool-assisted everyday tasks — with your review and permission before sensitive actions." />
+  <title>KeepFlow – Your Personal AI Agent</title>
+  <meta name="description" content="Meet KeepFlow, your personal AI agent that understands your work, uses tools, and helps complete real-world tasks." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 100'%3E%3Cg fill='%230064E0'%3E%3Cpath d='M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z'/%3E%3Crect x='61' y='18' width='14' height='14' rx='4'/%3E%3Crect x='82' y='22' width='14' height='14' rx='4'/%3E%3Crect x='61' y='43' width='14' height='14' rx='4'/%3E%3Crect x='82' y='43' width='14' height='14' rx='4'/%3E%3Crect x='103' y='39' width='9' height='14' rx='4'/%3E%3Crect x='61' y='68' width='14' height='14' rx='4'/%3E%3Crect x='82' y='64' width='14' height='14' rx='4'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="canonical" href="https://keepflow.app/" />
+  <link rel="canonical" href="https://keepflow.in/" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KeepFlow" />
+  <meta property="og:title" content="KeepFlow – Your Personal AI Agent" />
+  <meta property="og:description" content="Meet KeepFlow, your personal AI agent that understands your work, uses tools, and helps complete real-world tasks." />
+  <meta property="og:url" content="https://keepflow.in/" />
+  <meta property="og:image" content="https://keepflow.in/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KeepFlow – Your Personal AI Agent" />
+  <meta name="twitter:description" content="Meet KeepFlow, your personal AI agent that understands your work, uses tools, and helps complete real-world tasks." />
+  <meta name="twitter:image" content="https://keepflow.in/og-image.svg" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "Organization", "name": "KeepFlow", "url": "https://keepflow.in/", "description": "A personal AI agent designed to understand work and help complete real-world tasks.", "logo": "https://keepflow.in/og-image.svg"}
+  </script>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "WebSite", "name": "KeepFlow", "url": "https://keepflow.in/", "publisher": {"@type": "Organization", "name": "KeepFlow", "url": "https://keepflow.in/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is KeepFlow?", "acceptedAnswer": {"@type": "Answer", "text": "KeepFlow is a personal AI agent being built to help with everyday digital tasks — planning, research, drafting, and tool-assisted workflows — with your review and permission for sensitive actions."}}, {"@type": "Question", "name": "Will KeepFlow take actions without my permission?", "acceptedAnswer": {"@type": "Answer", "text": "Sensitive actions such as sending messages, sharing data, or making purchases are designed to require your explicit confirmation before execution."}}, {"@type": "Question", "name": "Is KeepFlow available now?", "acceptedAnswer": {"@type": "Answer", "text": "KeepFlow is in early access. You can join the waitlist to be notified when onboarding opens. Features and integrations may change during development."}}, {"@type": "Question", "name": "How is my data handled?", "acceptedAnswer": {"@type": "Answer", "text": "See KeepFlow’s Privacy Policy for website and waitlist information handling, and the Security page for product design principles. Only connect services and share data you choose to approve."}}]}
+  </script>
 </head>
 <body>
   <header class="navbar" id="navbar">
@@ -34,8 +54,8 @@
   <main class="page-wrapper">
     <section class="hero-section" id="top">
       <div class="hero-badge"><span class="badge-pulse"></span><span>Early access rolling out in batches</span></div>
-      <h1 class="hero-title">KeepFlow, your <span class="gradient-word">personal AI agent.</span></h1>
-      <p class="hero-subtitle" style="max-width:720px;">KeepFlow is a personal AI agent designed to help with everyday digital work — planning, research, drafts, and tool-assisted tasks — while keeping you in control of permissions and sensitive actions.</p>
+      <h1 class="hero-title">Your personal AI agent. <span class="gradient-word">Ready to work.</span></h1>
+      <p class="hero-subtitle" style="max-width:720px;">KeepFlow is a personal AI agent designed to help with everyday digital work â€” planning, research, drafts, and tool-assisted tasks â€” while keeping you in control of permissions and sensitive actions.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
         <a href="#waitlist" class="btn-primary-black">Join the early access list</a>
         <a href="/how-it-works.html" class="btn-primary-white">See how it works</a>
@@ -46,7 +66,7 @@
       <div class="section-container">
         <div class="section-label">What is KeepFlow?</div>
         <h2 class="section-title">A personal AI agent for everyday tasks</h2>
-        <p style="max-width:760px;color:var(--text-secondary);font-size:16px;line-height:1.7;">KeepFlow helps you turn goals into completed steps. Instead of only answering questions, it’s being built to plan work, use approved tools and services, prepare results you can review, and ask before taking sensitive actions like sending, sharing, or purchasing.</p>
+        <p style="max-width:760px;color:var(--text-secondary);font-size:16px;line-height:1.7;">KeepFlow helps you turn goals into completed steps. Instead of only answering questions, itâ€™s being built to plan work, use approved tools and services, prepare results you can review, and ask before taking sensitive actions like sending, sharing, or purchasing.</p>
       </div>
     </section>
 
@@ -59,20 +79,29 @@
           <div style="background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:18px;"><h3 style="margin:0 0 6px;font-size:17px;">Draft &amp; organize</h3><p style="margin:0;color:var(--text-secondary);font-size:14.5px;line-height:1.6;">Create drafts, plans, checklists, and follow-ups.</p></div>
           <div style="background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:18px;"><h3 style="margin:0 0 6px;font-size:17px;">Use approved tools</h3><p style="margin:0;color:var(--text-secondary);font-size:14.5px;line-height:1.6;">Assist with workflows across services you connect and permit.</p></div>
         </div>
-        <p style="margin-top:16px;"><a href="/product.html">Explore product capabilities →</a></p>
+        <p style="margin-top:16px;"><a href="/product.html">Explore product capabilities â†’</a></p>
       </div>
     </section>
 
     <section class="feature-section bg-white">
       <div class="section-container">
         <div class="section-label">How it works</div>
-        <h2 class="section-title">Goal → plan → approved tools → your review</h2>
-        <p style="max-width:760px;color:var(--text-secondary);font-size:16px;line-height:1.7;">You set a goal. KeepFlow plans the steps, uses only the tools and access you approve, and asks for confirmation before sensitive actions. You get the result with context you can understand.</p>
-        <p style="margin-top:16px;"><a href="/how-it-works.html">See the full workflow →</a> &nbsp;·&nbsp; <a href="/use-cases.html">View everyday use cases →</a></p>
+        <h2 class="section-title">Goal â†’ plan â†’ approved tools â†’ your review</h2>
+        <p style="max-width:760px;color:var(--text-secondary);font-size:16px;line-height:1.7;">KeepFlow is designed to understand what you’re asking for, break work into steps, use only the tools and access you approve, and prepare results you can review. Before sensitive actions — such as sending, sharing, or purchasing — it should ask for your explicit confirmation.</p>
+        <p style="margin-top:16px;"><a href="/how-it-works.html">See the full workflow â†’</a> &nbsp;Â·&nbsp; <a href="/use-cases.html">View everyday use cases â†’</a></p>
       </div>
     </section>
 
     <section class="feature-section bg-gray">
+      <div class="section-container">
+        <div class="section-label">Your digital world, connected</div>
+        <h2 class="section-title">Use approved tools and services</h2>
+        <p style="max-width:760px;color:var(--text-secondary);font-size:16px;line-height:1.7;">KeepFlow is being designed to work with the tools and services you choose to connect, so it can help with research, drafts, and workflows in context. Integrations and capabilities will depend on what you enable and what is available during early access.</p>
+        <p style="margin-top:16px;"><a href="/product.html">View product capabilities →</a></p>
+      </div>
+    </section>
+
+    <section class="feature-section bg-white">
       <div class="section-container">
         <div class="section-label">Privacy &amp; control</div>
         <h2 class="section-title">Permissions before important actions</h2>
@@ -85,7 +114,7 @@
         <div class="section-label">FAQ</div>
         <h2 class="section-title">Frequently asked questions</h2>
         <div style="display:grid;gap:12px;margin-top:22px;">
-          <details style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:14px 16px;"><summary style="cursor:pointer;font-weight:700;">What is KeepFlow?</summary><p style="margin:10px 0 0;color:var(--text-secondary);line-height:1.65;">KeepFlow is a personal AI agent being built to help with everyday digital tasks — planning, research, drafting, and tool-assisted workflows — with your review and permission for sensitive actions.</p></details>
+          <details style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:14px 16px;"><summary style="cursor:pointer;font-weight:700;">What is KeepFlow?</summary><p style="margin:10px 0 0;color:var(--text-secondary);line-height:1.65;">KeepFlow is a personal AI agent being built to help with everyday digital tasks â€” planning, research, drafting, and tool-assisted workflows â€” with your review and permission for sensitive actions.</p></details>
           <details style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:14px 16px;"><summary style="cursor:pointer;font-weight:700;">Will KeepFlow take actions without my permission?</summary><p style="margin:10px 0 0;color:var(--text-secondary);line-height:1.65;">Sensitive actions (such as sending messages, sharing data, or making purchases) are designed to require your explicit confirmation before execution.</p></details>
           <details style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:14px 16px;"><summary style="cursor:pointer;font-weight:700;">Is KeepFlow available now?</summary><p style="margin:10px 0 0;color:var(--text-secondary);line-height:1.65;">KeepFlow is in early access. Join the waitlist to be notified when onboarding opens. Features and integrations may change during development.</p></details>
           <details style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:14px 16px;"><summary style="cursor:pointer;font-weight:700;">How is my data handled?</summary><p style="margin:10px 0 0;color:var(--text-secondary);line-height:1.65;">See our <a href="/privacy.html">Privacy Policy</a> for how website/waitlist information is handled, and our <a href="/security.html">Security page</a> for product design principles. Only connect services and share data you choose to approve.</p></details>
@@ -117,9 +146,9 @@
 
   <div class="modal-backdrop" id="waitlistModalBackdrop" onclick="if(event.target === this) closeWaitlistModal()">
     <div class="waitlist-modal">
-      <button class="modal-close" onclick="closeWaitlistModal()" aria-label="Close">×</button>
+      <button class="modal-close" onclick="closeWaitlistModal()" aria-label="Close">Ã—</button>
       <h2 id="modalHeading">Join the KeepFlow Waitlist</h2>
-      <p id="modalSubheading">We’re onboarding in batches to ensure quality and capacity.</p>
+      <p id="modalSubheading">Weâ€™re onboarding in batches to ensure quality and capacity.</p>
       <form id="modalForm" onsubmit="handleModalSubmit(event)">
         <input type="email" id="modalEmail" class="modal-input" placeholder="Email address" required style="width:100%;margin-bottom:10px;" />
         <input type="text" id="modalCode" class="modal-input" placeholder="Optional: Invite or referral code" style="width:100%;margin-bottom:12px;" />
@@ -131,7 +160,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <div>© KeepFlow Inc. 2026</div>
+      <div>Â© KeepFlow Inc. 2026</div>
       <div class="footer-links" aria-label="Site and legal pages">
         <button type="button" onclick="location.href='/product.html'">Product</button>
         <button type="button" onclick="location.href='/how-it-works.html'">How it works</button>
@@ -246,12 +275,12 @@
 
       if (modalMode === 'login') {
         heading.textContent = 'Log in to Keepflow';
-        subheading.textContent = 'Invite-based access is rolling out in batches. If you have an invite, join the waitlist with the same email and we’ll match your code when access opens.';
+        subheading.textContent = 'Invite-based access is rolling out in batches. If you have an invite, join the waitlist with the same email and weâ€™ll match your code when access opens.';
         codeInput.placeholder = 'Invite or referral code (optional)';
         submitBtn.textContent = 'Request access';
       } else {
         heading.textContent = 'Join the Keepflow Waitlist';
-        subheading.textContent = 'We’re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.';
+        subheading.textContent = 'Weâ€™re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.';
         codeInput.placeholder = 'Optional: Invite or referral code';
         submitBtn.textContent = 'Reserve my spot';
       }
@@ -284,8 +313,8 @@
       if (conf) {
         conf.style.display = 'block';
         conf.innerHTML = result.duplicate
-          ? `You’re already on the list for <strong>${email}</strong>. We’ll be in touch.`
-          : `🎉 You’re on the list, <strong>${email}</strong>. We’ll email you when your spot is ready.`;
+          ? `Youâ€™re already on the list for <strong>${email}</strong>. Weâ€™ll be in touch.`
+          : `ðŸŽ‰ Youâ€™re on the list, <strong>${email}</strong>. Weâ€™ll email you when your spot is ready.`;
       }
     }
 
@@ -319,7 +348,7 @@
         btn.style.color = '#111';
       } else {
         btn.dataset.connected = 'true';
-        btn.textContent = '✓ Connected to Keepflow Linux VM · Checkout ready';
+        btn.textContent = 'âœ“ Connected to Keepflow Linux VM Â· Checkout ready';
         btn.style.background = '#e6f0ff';
         btn.style.color = '#005bb5';
       }
@@ -336,8 +365,8 @@
       userSendBubble.textContent = 'Send it';
       stream.appendChild(userSendBubble);
 
-      document.getElementById('sendItText').textContent = 'Sent to school office ✓';
-      document.getElementById('pdfSubStatus').textContent = 'PDF · Signed & emailed ✓';
+      document.getElementById('sendItText').textContent = 'Sent to school office âœ“';
+      document.getElementById('pdfSubStatus').textContent = 'PDF Â· Signed & emailed âœ“';
 
       setTimeout(() => {
         document.getElementById('typingIndicatorPill').style.display = 'none';
@@ -362,12 +391,12 @@
       if (decision === 'allow') {
         banner.style.background = '#ecfdf5';
         banner.style.color = '#065f46';
-        banner.innerHTML = '✓ Approved · Order placed with virtual card •••• 1234 <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Undo / Reset demo</span>';
+        banner.innerHTML = 'âœ“ Approved Â· Order placed with virtual card â€¢â€¢â€¢â€¢ 1234 <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Undo / Reset demo</span>';
         topChip.textContent = 'Order confirmed (#NC-8492)';
       } else {
         banner.style.background = '#fef2f2';
         banner.style.color = '#991b1b';
-        banner.innerHTML = '✕ Action denied · Keepflow canceled checkout <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Reset demo</span>';
+        banner.innerHTML = 'âœ• Action denied Â· Keepflow canceled checkout <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Reset demo</span>';
         topChip.textContent = 'Order canceled by user';
       }
     }
@@ -389,7 +418,7 @@
         pwEl.style.letterSpacing = '0.5px';
         btn.textContent = 'Hide';
       } else {
-        pwEl.textContent = '••••••••••••';
+        pwEl.textContent = 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢';
         pwEl.style.letterSpacing = '2px';
         btn.textContent = 'Show';
       }
@@ -397,7 +426,7 @@
 
     function lockCredentialVault() {
       const btn = document.getElementById('credEnterBtn');
-      btn.textContent = '✓ Encrypted in Zero-Knowledge Vault';
+      btn.textContent = 'âœ“ Encrypted in Zero-Knowledge Vault';
       btn.style.background = '#10b981';
     }
 
@@ -414,9 +443,9 @@
 
     // Section 7: Guided Tour Chapters
     const chapters = [
-      'Chapter 01 — Delegating your weekly schedule and travel logistics to Keepflow',
-      'Chapter 02 — Watching Keepflow research and compare flights inside your Cloud VM',
-      'Chapter 03 — Approving purchases safely with one-time virtual cards'
+      'Chapter 01 â€” Delegating your weekly schedule and travel logistics to Keepflow',
+      'Chapter 02 â€” Watching Keepflow research and compare flights inside your Cloud VM',
+      'Chapter 03 â€” Approving purchases safely with one-time virtual cards'
     ];
 
     function switchTourChapter(index, btn) {
@@ -427,8 +456,8 @@
 
     function playGuidedTour() {
       const titleEl = document.getElementById('tourCaptionTitle');
-      if (!titleEl.textContent.startsWith('▶ Playing:')) {
-        titleEl.textContent = '▶ Playing: ' + titleEl.textContent;
+      if (!titleEl.textContent.startsWith('â–¶ Playing:')) {
+        titleEl.textContent = 'â–¶ Playing: ' + titleEl.textContent;
       }
     }
 

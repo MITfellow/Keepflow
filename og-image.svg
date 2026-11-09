@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">KeepFlow — Personal AI Agent</title>
+  <desc id="desc">KeepFlow social preview image with brand mark and tagline.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7FAFF"/>
+      <stop offset="100%" stop-color="#EAF2FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="48" y="48" width="1104" height="534" rx="28" fill="#FFFFFF" stroke="rgba(0,100,224,0.12)"/>
+  <g transform="translate(120 220) scale(1.15)" fill="#0064E0">
+    <path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/>
+    <rect x="61" y="18" width="14" height="14" rx="4"/>
+    <rect x="82" y="22" width="14" height="14" rx="4"/>
+    <rect x="61" y="43" width="14" height="14" rx="4"/>
+    <rect x="82" y="43" width="14" height="14" rx="4"/>
+    <rect x="103" y="39" width="9" height="14" rx="4"/>
+    <rect x="61" y="68" width="14" height="14" rx="4"/>
+    <rect x="82" y="64" width="14" height="14" rx="4"/>
+  </g>
+  <text x="300" y="285" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="700" fill="#0A0A0A">KeepFlow</text>
+  <text x="300" y="360" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="500" fill="#334155">Your Personal AI Agent</text>
+  <text x="300" y="420" font-family="Inter, Arial, sans-serif" font-size="26" fill="#5E6368">Understand work. Use approved tools. Complete tasks with your control.</text>
+  <text x="120" y="540" font-family="Inter, Arial, sans-serif" font-size="22" fill="#0064E0">keepflow.in</text>
+</svg>

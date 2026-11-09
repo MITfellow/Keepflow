@@ -16,10 +16,23 @@ const types = {
   '.ico': 'image/x-icon',
   '.webmanifest': 'application/manifest+json',
   '.txt': 'text/plain; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
 };
 
 function safePath(urlPath) {
-  const decoded = decodeURIComponent((urlPath || '/').split('?')[0]);
+  const raw = decodeURIComponent((urlPath || '/').split('?')[0]);
+  const rewrites = {
+    '/product': '/product.html',
+    '/how-it-works': '/how-it-works.html',
+    '/use-cases': '/use-cases.html',
+    '/blog': '/blog.html',
+    '/about': '/about.html',
+    '/privacy': '/privacy.html',
+    '/terms': '/terms.html',
+    '/cookies': '/cookies.html',
+    '/security': '/security.html',
+  };
+  const decoded = rewrites[raw] || raw;
   const rel = decoded === '/' ? '/index.html' : decoded;
   const full = path.normalize(path.join(root, rel));
   if (!full.startsWith(root)) return null;

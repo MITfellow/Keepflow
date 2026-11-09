@@ -22,6 +22,9 @@ services:
         source: /blog
         destination: /blog.html
       - type: rewrite
+        source: /about
+        destination: /about.html
+      - type: rewrite
         source: /privacy
         destination: /privacy.html
       - type: rewrite
