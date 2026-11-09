@@ -1,0 +1,9 @@
+{
+  "name": "keepflow-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static Keepflow landing page",
+  "scripts": {
+    "build": "node -e \"console.log('Static site: no build step required')\""
+  }
+}
