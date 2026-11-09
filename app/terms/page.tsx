@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms",
-  description: "The plain-language terms for the Rill pre-launch waitlist.",
+  description: "The plain-language terms for the Keepflow pre-launch waitlist.",
   alternates: {
     canonical: "/terms",
   },
@@ -21,13 +21,13 @@ export default function TermsPage() {
     >
       <h2>Using the waitlist</h2>
       <p>
-        By joining the Rill waitlist, you agree to these terms. If you do not agree, do not
+        By joining the Keepflow waitlist, you agree to these terms. If you do not agree, do not
         submit your email address. You must be at least 16 years old to join.
       </p>
 
       <h2>What the waitlist is</h2>
       <p>
-        The waitlist is a free expression of interest in Rill, a personal AI agent that is still
+        The waitlist is a free expression of interest in Keepflow, a personal AI agent that is still
         in development. Joining does not create a contract for the product, does not reserve a
         specific launch date, and does not guarantee access. Early access will open in waves
         through spring 2027, and we may change the timing or the shape of the product as it
@@ -60,14 +60,14 @@ export default function TermsPage() {
         <li>Do not submit someone else&rsquo;s email address without their permission.</li>
         <li>Do not use the site to send spam, malware, or unlawful content.</li>
         <li>Do not attempt to break, overload, scrape, or bypass the site&rsquo;s security.</li>
-        <li>Do not impersonate Rill, its team, or another waitlist member.</li>
+        <li>Do not impersonate Keepflow, its team, or another waitlist member.</li>
       </ul>
 
       <h2>Content and ownership</h2>
       <p>
-        The Rill name, wordmark, page design, and written content belong to their respective
+        The Keepflow name, wordmark, page design, and written content belong to their respective
         owners. You may share the site and your referral link. You may not copy the site or its
-        brand into a competing product. Feedback you send us may be used to improve Rill
+        brand into a competing product. Feedback you send us may be used to improve Keepflow
         without obligation to you.
       </p>
 
@@ -103,7 +103,7 @@ export default function TermsPage() {
 
       <p className="note">
         This is a plain-language summary for a pre-launch waitlist, not the full agreement for
-        the Rill product. A product agreement and privacy notice will be published before early
+        the Keepflow product. A product agreement and privacy notice will be published before early
         access begins.
       </p>
     </LegalPage>

@@ -1,8 +1,8 @@
 {
-  "name": "rill-waitlist",
+  "name": "keepflow-waitlist",
   "version": "1.0.0",
   "private": true,
-  "description": "The pre-launch waitlist for Rill, a personal AI agent for people building something of their own.",
+  "description": "The pre-launch waitlist for Keepflow, a personal AI agent for people building something of their own.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

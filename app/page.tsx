@@ -16,7 +16,7 @@ const capabilities = [
   {
     index: "01",
     title: "Replies that already sound like you.",
-    body: "Rill reads the thread, checks your calendar, and drafts the reply in your voice. You approve, edit, or send — the judgment stays yours.",
+    body: "Keepflow reads the thread, checks your calendar, and drafts the reply in your voice. You approve, edit, or send — the judgment stays yours.",
     example: "Draft ready · Re: Thursday's call",
   },
   {
@@ -42,12 +42,12 @@ const steps = [
   {
     number: "02",
     title: "Set your terms.",
-    body: "Choose what Rill can read, draft, and send. Draft-and-approve is the default, and nothing happens off the record.",
+    body: "Choose what Keepflow can read, draft, and send. Draft-and-approve is the default, and nothing happens off the record.",
   },
   {
     number: "03",
     title: "Hand over the small stuff.",
-    body: "Rill starts with email and calendar. As trust builds, it earns more of your day — never the other way around.",
+    body: "Keepflow starts with email and calendar. As trust builds, it earns more of your day — never the other way around.",
   },
 ];
 
@@ -55,7 +55,7 @@ const trustItems = [
   {
     icon: ShieldIcon,
     title: "Your inbox is not training data.",
-    body: "Rill does not train shared models on your mail, and does not sell or rent it. Your context stays yours.",
+    body: "Keepflow does not train shared models on your mail, and does not sell or rent it. Your context stays yours.",
   },
   {
     icon: LockIcon,
@@ -102,12 +102,12 @@ export default function HomePage() {
 
             <h1 className="hero-title load-in load-2">
               <span>Your day,</span>
-              <span>quietly handled.</span>
+              <span>kept in flow.</span>
             </h1>
 
             <p className="hero-subhead load-in load-3">
-              For people building something of their own, Rill handles email, calendar, and
-              follow-through — quietly, and always on your terms.
+              Keepflow handles email, calendar, and follow-through — quietly, and always on
+              your terms.
             </p>
 
             <div className="hero-form load-in load-4" id="join">
@@ -136,7 +136,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="lead">
-              Rill takes the work that sits between you and the work that matters. It is not
+              Keepflow takes the work that sits between you and the work that matters. It is not
               another inbox to check. It is the quiet layer that keeps the day moving.
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="lead">
-              No new workflow to learn. Rill works inside the accounts you already use, within
+              No new workflow to learn. Keepflow works inside the accounts you already use, within
               limits you can see and change.
             </p>
           </div>
@@ -196,7 +196,7 @@ export default function HomePage() {
               A quiet agent, not a black box.
             </h2>
             <p className="lead">
-              Access to your day is a serious thing. Rill is built so you can see what it can
+              Access to your day is a serious thing. Keepflow is built so you can see what it can
               do, change the boundary, and leave without asking permission.
             </p>
             <a className="trust-link" href="/privacy">
@@ -223,7 +223,7 @@ export default function HomePage() {
       </section>
 
       <section
-        className="section section-rule"
+        className="section section-rule section-blue"
         id="referrals"
         aria-labelledby="referrals-title"
       >

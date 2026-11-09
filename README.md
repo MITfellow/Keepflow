@@ -1,6 +1,6 @@
-# Rill — waitlist
+# Keepflow — waitlist
 
-The pre-launch waitlist for **Rill**, a personal AI agent for people building something of their own.
+The pre-launch waitlist for **Keepflow**, a personal AI agent for people building something of their own.
 
 A single landing page with a working signup flow, referral positions, email confirmation, unsubscribe handling, and a password-protected admin dashboard with CSV export.
 
@@ -33,16 +33,16 @@ IP_HASH_SALT=local-development-salt
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Production | Public origin, no trailing slash, e.g. `https://rill.agent`. Used for canonical URLs, OG tags, referral links, and unsubscribe links. |
+| `NEXT_PUBLIC_SITE_URL` | Production | Public origin, no trailing slash, e.g. `https://keepflow.app`. Used for canonical URLs, OG tags, referral links, and unsubscribe links. |
 | `SUPABASE_URL` | Production | Supabase project URL. |
 | `SUPABASE_SERVICE_ROLE_KEY` | Production | Server-only key. Never expose it to the browser. |
 | `RESEND_API_KEY` | Production | Resend API key for confirmation email. |
-| `RESEND_FROM_EMAIL` | Production | Verified sender, e.g. `Rill <hello@yourdomain.com>`. |
+| `RESEND_FROM_EMAIL` | Production | Verified sender, e.g. `Keepflow <hello@yourdomain.com>`. |
 | `ADMIN_SECRET` | Production | Admin login secret. Minimum 16 characters; use a long random value. |
 | `IP_HASH_SALT` | Production | Salt for hashed IPs used in rate limiting. Never reuse across environments. |
 | `WAITLIST_ALLOW_FILE_STORE` | Local only | Set to `true` to allow the file store in a production build. |
 | `WAITLIST_PREVIEW_STORE` | Preview only | Set to `file` to allow the ephemeral file store on a preview deployment. |
-| `WAITLIST_FILE_PATH` | Optional | Override the file store path (defaults to `.data/waitlist.json`, or `/tmp/rill-waitlist.json` on Vercel). |
+| `WAITLIST_FILE_PATH` | Optional | Override the file store path (defaults to `.data/waitlist.json`, or `/tmp/keepflow-waitlist.json` on Vercel). |
 
 Storage selection:
 
@@ -116,7 +116,7 @@ A deployment without Supabase and Resend is a **demo, not a production waitlist*
 
 ## Before launch
 
-- [ ] Replace the placeholder contact email `hello@rill.agent` in `lib/site.ts` and the legal pages with a real, monitored address.
+- [ ] Replace the placeholder contact email `hello@keepflow.app` in `lib/site.ts` and the legal pages with a real, monitored address.
 - [ ] Set `NEXT_PUBLIC_SITE_URL` to the production domain.
 - [ ] Run the Supabase migration against the production project.
 - [ ] Verify the Resend sending domain and send a real test signup.

@@ -61,9 +61,9 @@ async function submitWaitlist(page: Page, scope: string, email: string) {
 test("home page renders its core content and metadata without overlap", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page).toHaveTitle("Rill — Your day, quietly handled.");
+  await expect(page).toHaveTitle("Keepflow — Your day, kept in flow.");
   await expect(
-    page.getByRole("heading", { level: 1, name: /Your day, quietly handled/i }),
+    page.getByRole("heading", { level: 1, name: /Your day, kept in flow/i }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Three things off your plate." })).toBeVisible();
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeAttached();
@@ -382,7 +382,7 @@ test("privacy page has no WCAG A/AA violations and robots/sitemap are present", 
 
   const manifest = await request.get("/site.webmanifest");
   expect(manifest.status()).toBe(200);
-  expect(await manifest.json()).toMatchObject({ name: "Rill — Your day, quietly handled." });
+  expect(await manifest.json()).toMatchObject({ name: "Keepflow — Your day, kept in flow." });
 
   const og = await request.get("/opengraph-image");
   expect(og.status()).toBe(200);

@@ -5,7 +5,7 @@ import { UnsubscribeForm } from "@/components/unsubscribe-form";
 
 export const metadata: Metadata = {
   title: "Unsubscribe",
-  description: "Remove your email from the Rill waitlist.",
+  description: "Remove your email from the Keepflow waitlist.",
   robots: {
     index: false,
     follow: false,

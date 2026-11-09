@@ -9,8 +9,8 @@ export function SiteFooter() {
       <div className="shell">
         <div className="footer-top">
           <div className="footer-brand">
-            <Link href="/" className="wordmark" aria-label="Rill home">
-              rill
+            <Link href="/" className="wordmark" aria-label="Keepflow home">
+              keepflow
             </Link>
             <p>A quieter personal agent for people building something of their own.</p>
           </div>
@@ -50,7 +50,7 @@ export function SiteFooter() {
             </div>
 
             <div className="footer-group">
-              <h2>Share Rill</h2>
+              <h2>Share Keepflow</h2>
               <ShareActions
                 url={absoluteUrl("/")}
                 text={site.shareText}
@@ -62,7 +62,7 @@ export function SiteFooter() {
 
         <div className="footer-bottom">
           <p>
-            © {new Date().getFullYear()} Rill. Pre-launch. This site collects waitlist
+            © {new Date().getFullYear()} Keepflow. Pre-launch. This site collects waitlist
             emails only.
           </p>
           <p>{site.launch} · Early access in waves</p>

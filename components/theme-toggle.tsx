@@ -20,7 +20,7 @@ export function ThemeToggle() {
       root.dataset.theme = next;
       root.style.colorScheme = next;
       try {
-        window.localStorage.setItem("rill-theme", next);
+        window.localStorage.setItem("keepflow-theme", next);
       } catch {
         // Storage can be unavailable in private modes; the theme still applies.
       }

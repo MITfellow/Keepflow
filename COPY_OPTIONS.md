@@ -1,4 +1,4 @@
-# Rill — Copy Options
+# Keepflow — Copy Options
 
 All copy on the page is final-quality. There are no lorem-ipsum or placeholder strings.
 
@@ -6,9 +6,9 @@ All copy on the page is final-quality. There are no lorem-ipsum or placeholder s
 
 ## Hero headline
 
-### Chosen — “Your day, quietly handled.”
+### Chosen — “Your day, kept in flow.”
 
-**Why it wins:** It is five words, it makes a concrete promise, and “quietly” does the brand work without becoming a slogan. It reads as a complete thought at both 375px and 1440px.
+**Why it wins:** It is five words, it makes a concrete promise, and it turns the product name into a feeling without becoming a slogan. It reads as a complete thought at both 375px and 1440px.
 
 ### Option 2 — “The calm behind your busiest days.”
 
@@ -23,9 +23,9 @@ All copy on the page is final-quality. There are no lorem-ipsum or placeholder s
 ## Subhead
 
 **Chosen:**
-“For people building something of their own, Rill handles email, calendar, and follow-through — quietly, and always on your terms.”
+“Keepflow handles email, calendar, and follow-through — quietly, and always on your terms.”
 
-**Why:** One sentence, names the audience and the three jobs, and ends on the control promise. “Always on your terms” is the trust thesis in five words.
+**Why:** One sentence, names the three jobs, and ends on the control promise. The audience is established in the eyebrow above, so the subhead does not repeat it. “Always on your terms” is the trust thesis in five words.
 
 ---
 
@@ -89,7 +89,7 @@ No “invite 10 friends for a mystery prize.” The reward is the actual product
 **Line:** “Join the list. We’ll write once, when your spot is ready.”
 **Button:** “Get early access”
 
-The hero promises a quieter day. The close asks for the first quiet minute.
+The hero promises a day in flow. The close asks for the first quiet minute.
 
 ---
 
@@ -120,7 +120,7 @@ Error messages are specific about the next action. They never scold the person.
 ## 404
 
 **Heading:** “This page went quiet.”
-**Line:** “The current doesn't run here. Head back to Rill and join the list.”
+**Line:** “The current doesn't run here. Head back to Keepflow and join the list.”
 **CTA:** “Back to the beginning”
 
 ---

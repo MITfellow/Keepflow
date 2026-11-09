@@ -23,7 +23,7 @@ function input(overrides: Partial<JoinWaitlistInput> = {}): JoinWaitlistInput {
 }
 
 beforeEach(async () => {
-  directory = await mkdtemp(path.join(os.tmpdir(), "rill-waitlist-test-"));
+  directory = await mkdtemp(path.join(os.tmpdir(), "keepflow-waitlist-test-"));
   process.env.WAITLIST_FILE_PATH = path.join(directory, "waitlist.json");
 });
 

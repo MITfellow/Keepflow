@@ -8,12 +8,12 @@ function request(url: string, headers: Record<string, string>): Request {
 
 describe("request guards", () => {
   it("accepts a missing origin and a matching origin", () => {
-    expect(isSameOrigin(request("https://rill.agent/api/waitlist", {}))).toBe(true);
+    expect(isSameOrigin(request("https://keepflow.app/api/waitlist", {}))).toBe(true);
     expect(
       isSameOrigin(
-        request("https://rill.agent/api/waitlist", {
-          origin: "https://rill.agent",
-          host: "rill.agent",
+        request("https://keepflow.app/api/waitlist", {
+          origin: "https://keepflow.app",
+          host: "keepflow.app",
         }),
       ),
     ).toBe(true);
@@ -22,9 +22,9 @@ describe("request guards", () => {
   it("rejects a cross-origin browser request", () => {
     expect(
       isSameOrigin(
-        request("https://rill.agent/api/waitlist", {
+        request("https://keepflow.app/api/waitlist", {
           origin: "https://evil.example",
-          host: "rill.agent",
+          host: "keepflow.app",
         }),
       ),
     ).toBe(false);
@@ -33,9 +33,9 @@ describe("request guards", () => {
   it("rejects a malformed origin", () => {
     expect(
       isSameOrigin(
-        request("https://rill.agent/api/waitlist", {
+        request("https://keepflow.app/api/waitlist", {
           origin: "not a url",
-          host: "rill.agent",
+          host: "keepflow.app",
         }),
       ),
     ).toBe(false);
@@ -44,14 +44,14 @@ describe("request guards", () => {
   it("requires a JSON content type", () => {
     expect(
       hasJsonContentType(
-        request("https://rill.agent/api/waitlist", {
+        request("https://keepflow.app/api/waitlist", {
           "content-type": "application/json; charset=utf-8",
         }),
       ),
     ).toBe(true);
     expect(
       hasJsonContentType(
-        request("https://rill.agent/api/waitlist", {
+        request("https://keepflow.app/api/waitlist", {
           "content-type": "text/plain",
         }),
       ),

@@ -6,8 +6,8 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="shell header-inner">
-        <Link href="/" className="wordmark" aria-label="Rill home">
-          rill
+        <Link href="/" className="wordmark" aria-label="Keepflow home">
+          keepflow
         </Link>
 
         <nav className="site-nav" aria-label="Primary">

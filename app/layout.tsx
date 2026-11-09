@@ -63,8 +63,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   colorScheme: "dark light",
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0c0f0c" },
-    { media: "(prefers-color-scheme: light)", color: "#eeeade" },
+    { media: "(prefers-color-scheme: dark)", color: "#04060b" },
+    { media: "(prefers-color-scheme: light)", color: "#f8faff" },
   ],
 };
 
@@ -72,7 +72,7 @@ const themeScript = `
 (function () {
   var root = document.documentElement;
   try {
-    var stored = localStorage.getItem("rill-theme");
+    var stored = localStorage.getItem("keepflow-theme");
     var system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
     var theme = stored === "light" || stored === "dark" ? stored : system;
     root.dataset.theme = theme;

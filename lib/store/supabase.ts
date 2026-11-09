@@ -53,7 +53,7 @@ function getClient(): Client {
     },
     global: {
       headers: {
-        "X-Client-Info": "rill-waitlist/1.0",
+        "X-Client-Info": "keepflow-waitlist/1.0",
       },
     },
   });

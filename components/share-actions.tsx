@@ -81,7 +81,7 @@ export function ShareActions({ url, text, className = "share-row", context = "si
     if (!navigator.share) return;
 
     try {
-      await navigator.share({ title: "Rill", text, url });
+      await navigator.share({ title: "Keepflow", text, url });
       track("referral_share_click", { action: "native" });
     } catch {
       // A cancelled share is not an error worth surfacing.

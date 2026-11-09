@@ -30,7 +30,7 @@ function getStorePath(): string {
   if (configured) return configured;
 
   if (process.env.VERCEL) {
-    return path.join("/tmp", "rill-waitlist.json");
+    return path.join("/tmp", "keepflow-waitlist.json");
   }
 
   return path.join(process.cwd(), ".data", "waitlist.json");

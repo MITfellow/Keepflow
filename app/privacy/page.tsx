@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "What the Rill waitlist collects, why it collects it, who processes it, and how to leave.",
+    "What the Keepflow waitlist collects, why it collects it, who processes it, and how to leave.",
   alternates: {
     canonical: "/privacy",
   },
@@ -22,9 +22,9 @@ export default function PrivacyPage() {
     >
       <h2>What this policy covers</h2>
       <p>
-        This policy covers the Rill waitlist at this site: the email form, referral links,
+        This policy covers the Keepflow waitlist at this site: the email form, referral links,
         confirmation and waitlist email, and the admin view used by the people running the
-        list. It does not cover the Rill product, which is not open yet. A separate product
+        list. It does not cover the Keepflow product, which is not open yet. A separate product
         privacy notice will be published before early access begins.
       </p>
 
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
       <p>
         To hold your place in line, send the confirmation and launch email you asked for,
         attribute referrals, keep the list free of automated abuse, and understand interest in
-        Rill in aggregate. We do not use your email for a newsletter or a drip campaign.
+        Keepflow in aggregate. We do not use your email for a newsletter or a drip campaign.
       </p>
 
       <h2>Who processes it</h2>

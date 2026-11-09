@@ -85,7 +85,7 @@ export async function POST(request: Request) {
   }
 
   const ip = getClientIp(request.headers);
-  const ipHash = hashForPrivacy(ip, process.env.IP_HASH_SALT || "rill-dev");
+  const ipHash = hashForPrivacy(ip, process.env.IP_HASH_SALT || "keepflow-dev");
   const limit = checkRateLimit(`waitlist:${ipHash}`, {
     limit: 6,
     windowMs: 15 * 60 * 1_000,

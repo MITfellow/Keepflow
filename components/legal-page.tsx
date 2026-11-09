@@ -27,7 +27,7 @@ export function LegalPage({ label, title, lead, updated, children }: LegalPagePr
             Join the waitlist
           </Link>
           <Link className="button button-ghost" href="/">
-            Back to Rill
+            Back to Keepflow
           </Link>
         </div>
       </div>

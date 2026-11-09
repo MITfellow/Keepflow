@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { createAdminSessionToken, safeEqual } from "@/lib/crypto";
 
-export const ADMIN_COOKIE_NAME = "rill_admin";
+export const ADMIN_COOKIE_NAME = "keepflow_admin";
 export const ADMIN_SESSION_MAX_AGE = 60 * 60 * 8;
 
 export function getAdminSecret(): string | null {

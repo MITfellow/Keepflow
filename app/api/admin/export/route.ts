@@ -53,7 +53,7 @@ export async function GET() {
       status: 200,
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="rill-waitlist-${date}.csv"`,
+        "Content-Disposition": `attachment; filename="keepflow-waitlist-${date}.csv"`,
         "Cache-Control": "no-store",
         "X-Content-Type-Options": "nosniff",
       },

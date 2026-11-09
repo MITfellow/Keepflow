@@ -2,12 +2,12 @@ import { CalendarIcon, MailIcon, SendIcon } from "@/components/icons";
 
 export function AgentPanel() {
   return (
-    <aside className="agent-panel" aria-label="A glimpse of Rill at work">
+    <aside className="agent-panel" aria-label="A glimpse of Keepflow at work">
       <div className="agent-head">
         <span className="agent-mark" aria-hidden="true">
-          r
+          k
         </span>
-        <span className="agent-title">Rill · your day</span>
+        <span className="agent-title">Keepflow · your day</span>
         <span className="agent-status">
           <span className="live-dot" aria-hidden="true" />
           Working quietly

@@ -62,7 +62,7 @@ export function UnsubscribeForm() {
           you by hand.
         </p>
         <Link className="button button-ghost" href="/">
-          Back to Rill
+          Back to Keepflow
         </Link>
       </div>
     );
@@ -81,7 +81,7 @@ export function UnsubscribeForm() {
           way, you can ignore it. Your referral link no longer adds to a waitlist place.
         </p>
         <Link className="button button-ghost" href="/">
-          Back to Rill
+          Back to Keepflow
         </Link>
       </div>
     );
@@ -92,7 +92,7 @@ export function UnsubscribeForm() {
       <p className="receipt-label">One click</p>
       <h2 className="receipt-title">Remove this email from the waitlist?</h2>
       <p className="receipt-detail">
-        This removes your place and stops waitlist email. It does not affect any Rill product
+        This removes your place and stops waitlist email. It does not affect any Keepflow product
         account you may create later.
       </p>
 

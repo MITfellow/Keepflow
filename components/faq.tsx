@@ -1,6 +1,6 @@
 const faqs = [
   {
-    question: "What is Rill, exactly?",
+    question: "What is Keepflow, exactly?",
     answer:
       "A personal AI agent for people building something of their own. It reads the context around your day, drafts replies in your voice, protects focus time, and follows through on the small commitments that usually slip. You stay in charge of what leaves your account.",
   },
@@ -12,12 +12,12 @@ const faqs = [
   {
     question: "Will it send email without asking?",
     answer:
-      "Not at first. Early access starts in draft-and-approve mode: Rill prepares the reply, you review it, and you send. As trust builds, you can choose which kinds of messages it may send on its own and set clear limits.",
+      "Not at first. Early access starts in draft-and-approve mode: Keepflow prepares the reply, you review it, and you send. As trust builds, you can choose which kinds of messages it may send on its own and set clear limits.",
   },
   {
     question: "What happens to my data?",
     answer:
-      "Your messages are processed to do the work you ask for. Rill does not train shared models on your inbox, and does not sell or rent your data. You can export or delete your information, including what the agent remembers, at any time.",
+      "Your messages are processed to do the work you ask for. Keepflow does not train shared models on your inbox, and does not sell or rent your data. You can export or delete your information, including what the agent remembers, at any time.",
   },
   {
     question: "When does early access open?",

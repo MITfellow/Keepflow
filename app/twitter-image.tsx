@@ -1,6 +1,6 @@
 import { createOgImage } from "@/lib/og";
 
-export const alt = "Rill — Your day, quietly handled.";
+export const alt = "Keepflow — Your day, kept in flow.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const runtime = "nodejs";

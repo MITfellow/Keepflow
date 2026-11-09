@@ -36,34 +36,34 @@ function buildHtml(input: ConfirmationEmailInput): string {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
-    <title>You're on the Rill list</title>
+    <title>You're on the Keepflow list</title>
   </head>
-  <body style="margin:0;padding:0;background:#eeeade;color:#111711;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <body style="margin:0;padding:0;background:#f8faff;color:#05070d;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;">You're ${position} in line. Your private referral link is inside.</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eeeade;padding:32px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8faff;padding:32px 16px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#f7f3e9;border:1px solid #d8d5c8;border-radius:12px;overflow:hidden;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #dbe4f5;border-radius:12px;overflow:hidden;">
             <tr>
               <td style="padding:28px 32px 0;">
-                <div style="font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1;letter-spacing:-1px;color:#111711;">rill</div>
+                <div style="font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:1;letter-spacing:-1px;color:#05070d;">keepflow</div>
               </td>
             </tr>
             <tr>
               <td style="padding:38px 32px 0;">
-                <p style="margin:0 0 14px;font-size:12px;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;color:#576154;">You're on the list</p>
-                <h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.02;letter-spacing:-1.4px;font-weight:400;color:#111711;">You're ${position} in line.</h1>
-                <p style="margin:20px 0 0;font-size:16px;line-height:1.65;color:#3f493d;">Thank you for making room for Rill. We'll write once, when it's your turn.</p>
+                <p style="margin:0 0 14px;font-size:12px;line-height:1.4;letter-spacing:.08em;text-transform:uppercase;color:#46536b;">You're on the list</p>
+                <h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:40px;line-height:1.02;letter-spacing:-1.4px;font-weight:400;color:#05070d;">You're ${position} in line.</h1>
+                <p style="margin:20px 0 0;font-size:16px;line-height:1.65;color:#3a4558;">Thank you for making room for Keepflow. We'll write once, when it's your turn.</p>
               </td>
             </tr>
             <tr>
               <td style="padding:28px 32px 0;">
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#e3eadc;border-radius:8px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ff;border-radius:8px;">
                   <tr>
                     <td style="padding:20px 22px;">
-                      <p style="margin:0 0 8px;font-size:13px;line-height:1.5;color:#385235;"><strong>Move up the list</strong></p>
-                      <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#3f493d;">Share your private link. Every friend who joins with it moves you closer to the front. Three referrals unlocks priority onboarding.</p>
-                      <a href="${referralUrl}" style="display:inline-block;background:#385235;color:#f7f3e9;text-decoration:none;font-size:14px;font-weight:600;padding:12px 18px;border-radius:999px;">Open my referral link</a>
+                      <p style="margin:0 0 8px;font-size:13px;line-height:1.5;color:#1c4df5;"><strong>Move up the list</strong></p>
+                      <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#3a4558;">Share your private link. Every friend who joins with it moves you closer to the front. Three referrals unlocks priority onboarding.</p>
+                      <a href="${referralUrl}" style="display:inline-block;background:#05070d;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;padding:12px 18px;border-radius:999px;">Open my referral link</a>
                     </td>
                   </tr>
                 </table>
@@ -71,11 +71,11 @@ function buildHtml(input: ConfirmationEmailInput): string {
             </tr>
             <tr>
               <td style="padding:26px 32px 34px;">
-                <p style="margin:0;font-size:12px;line-height:1.65;color:#6c7467;">You received this because you joined the Rill waitlist at rill.agent. No newsletter, no drip campaign. <a href="${unsubscribeUrl}" style="color:#3f493d;text-decoration:underline;">Unsubscribe</a>.</p>
+                <p style="margin:0;font-size:12px;line-height:1.65;color:#6b788e;">You received this because you joined the Keepflow waitlist at keepflow.app. No newsletter, no drip campaign. <a href="${unsubscribeUrl}" style="color:#3a4558;text-decoration:underline;">Unsubscribe</a>.</p>
               </td>
             </tr>
           </table>
-          <p style="margin:18px 0 0;font-size:11px;line-height:1.5;color:#7b8275;">Rill · A quiet personal agent · ${escapeHtml(site.launch)}</p>
+          <p style="margin:18px 0 0;font-size:11px;line-height:1.5;color:#7a879c;">Keepflow · A quiet personal agent · ${escapeHtml(site.launch)}</p>
         </td>
       </tr>
     </table>
@@ -84,19 +84,19 @@ function buildHtml(input: ConfirmationEmailInput): string {
 }
 
 function buildPlainText(input: ConfirmationEmailInput): string {
-  return `You're ${formatOrdinal(input.position)} in line for Rill.
+  return `You're ${formatOrdinal(input.position)} in line for Keepflow.
 
-Thank you for making room for Rill. We'll write once, when it's your turn.
+Thank you for making room for Keepflow. We'll write once, when it's your turn.
 
 Move up the list:
 Share your private link. Every friend who joins with it moves you closer to the front. Three referrals unlocks priority onboarding.
 
 ${input.referralUrl}
 
-You received this because you joined the Rill waitlist at rill.agent. No newsletter, no drip campaign.
+You received this because you joined the Keepflow waitlist at keepflow.app. No newsletter, no drip campaign.
 Unsubscribe: ${input.unsubscribeUrl}
 
-Rill · ${site.launch}
+Keepflow · ${site.launch}
 `;
 }
 
@@ -115,7 +115,7 @@ export async function sendConfirmationEmail(
     const { data, error } = await resend.emails.send({
       from,
       to: input.to,
-      subject: `You're ${formatNumber(input.position)} in line for Rill`,
+      subject: `You're ${formatNumber(input.position)} in line for Keepflow`,
       html: buildHtml(input),
       text: buildPlainText(input),
       headers: {

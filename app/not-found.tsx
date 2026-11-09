@@ -7,7 +7,7 @@ export default function NotFound() {
         <p className="eyebrow">404</p>
         <h1>This page went quiet.</h1>
         <p>
-          The current doesn&rsquo;t run here. Head back to Rill, or join the list while
+          The current doesn&rsquo;t run here. Head back to Keepflow, or join the list while
           you&rsquo;re here.
         </p>
         <div className="page-actions">

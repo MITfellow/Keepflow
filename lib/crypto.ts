@@ -13,12 +13,12 @@ export function createReferralCode(length = 8): string {
   return code;
 }
 
-export function hashForPrivacy(value: string, salt = process.env.IP_HASH_SALT || "rill-dev"): string {
+export function hashForPrivacy(value: string, salt = process.env.IP_HASH_SALT || "keepflow-dev"): string {
   return createHmac("sha256", salt).update(value).digest("hex");
 }
 
 export function createAdminSessionToken(secret: string): string {
-  return createHmac("sha256", secret).update("rill-admin-session:v1").digest("hex");
+  return createHmac("sha256", secret).update("keepflow-admin-session:v1").digest("hex");
 }
 
 export function safeEqual(left: string, right: string): boolean {

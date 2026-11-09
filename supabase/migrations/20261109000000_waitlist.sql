@@ -1,4 +1,4 @@
--- Rill waitlist schema
+-- Keepflow waitlist schema
 -- Run this in the Supabase SQL editor, or with `supabase db push`.
 -- The application talks to this table only through the service role key.
 
