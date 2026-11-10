@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 100" role="img" aria-labelledby="t"><title id="t">KeepFlow</title>
+  <g fill="#245ac6" transform="translate(0,0)">
+    <path d="M45 18H28C17.5 18 11 24.5 11 35V65C11 75.5 17.5 82 28 82H45C49.4 82 52 79.4 52 75V70C52 65.6 49.4 63 45 63H34C30 63 28 60.5 28 56V44C28 39.5 30 37 34 37H45C49.4 37 52 34.4 52 30V25C52 20.6 49.4 18 45 18Z"/>
+    <rect x="61" y="18" width="14" height="14" rx="4"/>
+    <rect x="82" y="22" width="14" height="14" rx="4"/>
+    <rect x="61" y="43" width="14" height="14" rx="4"/>
+    <rect x="82" y="43" width="14" height="14" rx="4"/>
+    <rect x="103" y="39" width="9" height="14" rx="4"/>
+    <rect x="61" y="68" width="14" height="14" rx="4"/>
+    <rect x="82" y="64" width="14" height="14" rx="4"/>
+  </g>
+  <text x="132" y="66" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="700" letter-spacing="-2" fill="#132641">KeepFlow</text>
+</svg>
