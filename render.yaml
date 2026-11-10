@@ -24,15 +24,3 @@ services:
       - type: rewrite
         source: /about
         destination: /about.html
-      - type: rewrite
-        source: /privacy
-        destination: /privacy.html
-      - type: rewrite
-        source: /terms
-        destination: /terms.html
-      - type: rewrite
-        source: /cookies
-        destination: /cookies.html
-      - type: rewrite
-        source: /security
-        destination: /security.html
