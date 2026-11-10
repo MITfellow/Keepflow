@@ -1930,3 +1930,72 @@ details > summary::-webkit-details-marker { display:none; }
   .btn-waitlist-submit { width: 100%; }
   .footer-links { gap: 6px; }
 }
+
+
+/* ================= KeepFlow Signal — design system polish ================= */
+:root {
+  --kf-ink: #14181F;
+  --kf-paper: #FAFAF8;
+  --kf-blue: #0064E0;
+  --kf-blue-soft: #EDF4FF;
+  --kf-line: rgba(20,24,31,.10);
+  --kf-line-strong: rgba(20,24,31,.16);
+}
+
+body { background: var(--kf-paper); }
+
+.navbar { background: rgba(250,250,248,.78); backdrop-filter: saturate(140%) blur(14px); border-bottom: 1px solid var(--kf-line); }
+.navbar.scrolled { border-bottom-color: var(--kf-line-strong); }
+.navbar-inner { max-width: 1120px; }
+.keepflow-brand { color: var(--kf-ink) !important; font-size: 15px; letter-spacing: -.01em; }
+.keepflow-icon-box { background: var(--kf-blue) !important; box-shadow: 0 6px 16px rgba(0,100,224,.28); }
+
+.btn-primary-black { background: var(--kf-ink); color: #fff !important; border-radius: 10px !important; padding: 10px 15px; font-weight: 600; letter-spacing: -.01em; }
+.btn-primary-black:hover { background: #000 !important; transform: translateY(-1px); }
+.btn-primary-white { background: #fff; border: 1px solid var(--kf-line-strong); color: var(--kf-ink) !important; border-radius: 10px !important; }
+.btn-primary-white:hover { border-color: rgba(0,100,224,.35); color: var(--kf-blue) !important; }
+
+/* Hero — left aligned, signal panel */
+.hero-section { max-width: 1120px; margin: 0 auto; padding: 132px 24px 88px; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(300px, .98fr); gap: 56px; align-items: center; text-align: left; }
+.hero-badge { width: fit-content; margin: 0 0 18px; background: #fff; border: 1px solid var(--kf-line); color: #2b3340; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 6px 12px; box-shadow: none; }
+.badge-pulse { background: var(--kf-blue) !important; }
+.hero-title { text-align: left; margin: 0; max-width: 12ch; color: var(--kf-ink); font-size: clamp(44px, 6.1vw, 70px); line-height: .98; letter-spacing: -.045em; }
+.gradient-word { background: none; color: inherit; position: relative; white-space: nowrap; }
+.gradient-word::after { content: ""; position: absolute; left: 0; right: 0; bottom: .08em; height: .22em; background: rgba(0,100,224,.18); z-index: -1; border-radius: 2px; }
+.hero-subtitle { text-align: left; margin: 20px 0 0; max-width: 46ch; color: #414a56; font-size: 18px; line-height: 1.55; }
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.hero-micro { margin-top: 18px; color: #6b7480; font-size: 13px; }
+
+/* Agent run panel */
+.kf-panel { background: var(--kf-ink); color: #e8ecf4; border-radius: 22px; padding: 16px; box-shadow: 0 30px 70px rgba(14,20,30,.28); border: 1px solid rgba(255,255,255,.07); }
+.kf-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 6px 14px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.kf-panel-title { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #9fb0c8; font-family: "Plus Jakarta Sans",sans-serif; }
+.kf-dot { width: 8px; height: 8px; border-radius: 50%; background: #54e39a; box-shadow: 0 0 0 4px rgba(84,227,154,.12); }
+.kf-panel-tag { font-size: 11px; color: #cbd6ea; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); padding: 3px 8px; border-radius: 6px; }
+.kf-goal { margin: 14px 6px 10px; padding: 12px 13px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.07); border-radius: 14px; }
+.kf-goal-label { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: #8ea0bc; margin-bottom: 6px; }
+.kf-goal-text { font-size: 14px; color: #f4f7fc; line-height: 1.45; }
+.kf-log { display: grid; gap: 8px; padding: 4px 6px 2px; }
+.kf-step { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 12px; background: transparent; }
+.kf-step-mark { font-size: 12px; color: #7f90ab; }
+.kf-step.done .kf-step-mark { color: #54e39a; }
+.kf-step-text { font-size: 13px; color: #dbe3f2; }
+.kf-step.done .kf-step-text { color: #eef2fa; }
+.kf-step-state { font-size: 11px; color: #9fb0c8; }
+.kf-step.wait { background: rgba(0,100,224,.16); border: 1px solid rgba(90,160,255,.28); }
+.kf-step.wait .kf-step-mark { color: #7db4ff; }
+.kf-step.wait .kf-step-text { color: #fff; }
+.kf-step.wait .kf-step-state { color: #7db4ff; font-weight: 700; }
+.kf-panel-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 12px 6px 2px; border-top: 1px solid rgba(255,255,255,.08); margin-top: 12px; }
+.kf-panel-foot span { font-size: 11px; color: #9fb0c8; }
+.kf-approve { background:#fff; color:var(--kf-ink); border:0; border-radius:8px; padding:8px 12px; font-weight:700; font-size:12px; }
+
+/* Section eyebrow — used as structure, not decoration */
+.section-label { font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important; color: var(--kf-ink) !important; opacity: .55; margin-bottom: 12px !important; }
+.section-title { color: var(--kf-ink); }
+
+@media (max-width: 920px) {
+  .hero-section { grid-template-columns: 1fr; padding: 112px 18px 56px; gap: 32px; }
+  .hero-title { max-width: 16ch; }
+  .kf-panel { order: -0; }
+}

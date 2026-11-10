@@ -64,12 +64,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <main class="page-wrapper">
     <section class="hero-section" id="top">
-      <div class="hero-badge"><span class="badge-pulse"></span><span>Early access rolling out in batches</span></div>
-      <h1 class="hero-title">Your personal AI agent. <span class="gradient-word">Ready to work.</span></h1>
-      <p class="hero-subtitle" style="max-width:720px;">KeepFlow is a personal AI agent designed to help with everyday digital work â€” planning, research, drafts, and tool-assisted tasks â€” while keeping you in control of permissions and sensitive actions.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-        <a href="#waitlist" class="btn-primary-black">Join the early access list</a>
-        <a href="/how-it-works.html" class="btn-primary-white">See how it works</a>
+      <div>
+        <div class="hero-badge"><span class="badge-pulse"></span><span>Early access rolling out in batches</span></div>
+        <h1 class="hero-title">Your personal AI agent. <span class="gradient-word">Ready to work.</span></h1>
+        <p class="hero-subtitle">Meet KeepFlow, your personal AI agent that understands your work, uses the tools you approve, and helps complete real-world tasks — with your confirmation before anything sensitive happens.</p>
+        <div class="hero-cta-row">
+          <a href="#waitlist" class="btn-primary-black">Join the early access list</a>
+          <a href="/how-it-works.html" class="btn-primary-white">See how it works</a>
+        </div>
+        <p class="hero-micro">Early access only · Review before send, share, or purchase</p>
+      </div>
+
+      <div class="kf-panel" role="img" aria-label="Example of a KeepFlow task run waiting for your approval">
+        <div class="kf-panel-head">
+          <div class="kf-panel-title"><span class="kf-dot"></span>KeepFlow · task run</div>
+          <span class="kf-panel-tag">Awaiting approval</span>
+        </div>
+        <div class="kf-goal">
+          <div class="kf-goal-label">Your request</div>
+          <div class="kf-goal-text">“Find two weekend flights under ₹18,000 and draft a short note to Priya.”</div>
+        </div>
+        <div class="kf-log">
+          <div class="kf-step done">
+            <span class="kf-step-mark">✓</span>
+            <span class="kf-step-text">Compared published fares for Sat–Mon</span>
+            <span class="kf-step-state">Done</span>
+          </div>
+          <div class="kf-step done">
+            <span class="kf-step-mark">✓</span>
+            <span class="kf-step-text">Shortlisted DEL–BOM non-stop, 6:10 AM</span>
+            <span class="kf-step-state">Done</span>
+          </div>
+          <div class="kf-step done">
+            <span class="kf-step-mark">✓</span>
+            <span class="kf-step-text">Drafted note to Priya in your tone</span>
+            <span class="kf-step-state">Done</span>
+          </div>
+          <div class="kf-step wait">
+            <span class="kf-step-mark">!</span>
+            <span class="kf-step-text">Send note and hold seats</span>
+            <span class="kf-step-state">Needs approval</span>
+          </div>
+        </div>
+        <div class="kf-panel-foot">
+          <span>Nothing is sent or charged until you confirm.</span>
+          <button type="button" class="kf-approve" onclick="openWaitlistModal('waitlist'); return false;">Join to try</button>
+        </div>
       </div>
     </section>
 
