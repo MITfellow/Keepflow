@@ -38,6 +38,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is KeepFlow?", "acceptedAnswer": {"@type": "Answer", "text": "KeepFlow is a personal AI agent being built to help with everyday digital tasks — planning, research, drafting, and tool-assisted workflows — with your review and permission for sensitive actions."}}, {"@type": "Question", "name": "Will KeepFlow take actions without my permission?", "acceptedAnswer": {"@type": "Answer", "text": "Sensitive actions such as sending messages, sharing data, or making purchases are designed to require your explicit confirmation before execution."}}, {"@type": "Question", "name": "Is KeepFlow available now?", "acceptedAnswer": {"@type": "Answer", "text": "KeepFlow is in early access. You can join the waitlist to be notified when onboarding opens. Features and integrations may change during development."}}, {"@type": "Question", "name": "How is my data handled?", "acceptedAnswer": {"@type": "Answer", "text": "See KeepFlow’s Privacy Policy for website and waitlist information handling, and the Security page for product design principles. Only connect services and share data you choose to approve."}}]}
   </script>
+  <link rel="stylesheet" href="/human.css">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -293,7 +294,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const text = document.getElementById(textId);
       if (text) text.textContent = result.duplicate
         ? `You're already on the list, ${email}. We'll be in touch.`
-        : `You're on the Keepflow waitlist, ${email}. We'll email you when your spot is ready.`;
+        : `You're on the KeepFlow waitlist, ${email}. We'll email you when your spot is ready.`;
       if (banner) banner.style.display = 'inline-flex';
     }
 
@@ -315,13 +316,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById('modalConfirmation').style.display = 'none';
 
       if (modalMode === 'login') {
-        heading.textContent = 'Log in to Keepflow';
-        subheading.textContent = 'Invite-based access is rolling out in batches. If you have an invite, join the waitlist with the same email and weâ€™ll match your code when access opens.';
+        heading.textContent = 'Log in to KeepFlow';
+        subheading.textContent = 'Invite-based access is rolling out in batches. If you have an invite, join the waitlist with the same email and we’ll match your code when access opens.';
         codeInput.placeholder = 'Invite or referral code (optional)';
         submitBtn.textContent = 'Request access';
       } else {
-        heading.textContent = 'Join the Keepflow Waitlist';
-        subheading.textContent = 'Weâ€™re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.';
+        heading.textContent = 'Join the KeepFlow waitlist';
+        subheading.textContent = 'We’re onboarding new users in batches every week to ensure dedicated Cloud VM capacity for every member.';
         codeInput.placeholder = 'Optional: Invite or referral code';
         submitBtn.textContent = 'Reserve my spot';
       }
@@ -354,151 +355,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (conf) {
         conf.style.display = 'block';
         conf.innerHTML = result.duplicate
-          ? `Youâ€™re already on the list for <strong>${email}</strong>. Weâ€™ll be in touch.`
-          : `ðŸŽ‰ Youâ€™re on the list, <strong>${email}</strong>. Weâ€™ll email you when your spot is ready.`;
-      }
-    }
-
-    // Section 1: Interactive Movie Seat Picker
-    document.querySelectorAll('#interactiveSeatMap .seat.avail, #interactiveSeatMap .seat.selected').forEach(seat => {
-      seat.addEventListener('click', () => {
-        if (seat.classList.contains('selected')) {
-          seat.classList.remove('selected');
-          seat.classList.add('avail');
-        } else {
-          seat.classList.remove('avail');
-          seat.classList.add('selected');
-        }
-        const selectedSeats = Array.from(document.querySelectorAll('#interactiveSeatMap .seat.selected'))
-          .map(s => s.getAttribute('data-seat'));
-        const statusEl = document.getElementById('seatStatusText');
-        if (selectedSeats.length > 0) {
-          statusEl.textContent = `Selecting ${selectedSeats.length} seat${selectedSeats.length > 1 ? 's' : ''} (${selectedSeats.join(', ')})...`;
-        } else {
-          statusEl.textContent = 'Click any available seat to select...';
-        }
-      });
-    });
-
-    function toggleVmPreview() {
-      const btn = document.getElementById('openVmBtn');
-      if (btn.dataset.connected === 'true') {
-        btn.dataset.connected = 'false';
-        btn.textContent = 'Open browser';
-        btn.style.background = '#f2f3f5';
-        btn.style.color = '#111';
-      } else {
-        btn.dataset.connected = 'true';
-        btn.textContent = 'âœ“ Connected to Keepflow Linux VM Â· Checkout ready';
-        btn.style.background = '#e6f0ff';
-        btn.style.color = '#005bb5';
-      }
-    }
-
-    // Section 2: Interactive Permission Slip Send
-    let slipSent = false;
-    function triggerSendPermissionSlip() {
-      if (slipSent) return;
-      slipSent = true;
-      const stream = document.getElementById('fieldTripChatStream');
-      const userSendBubble = document.createElement('div');
-      userSendBubble.className = 'chat-bubble-blue';
-      userSendBubble.textContent = 'Send it';
-      stream.appendChild(userSendBubble);
-
-      document.getElementById('sendItText').textContent = 'Sent to school office âœ“';
-      document.getElementById('pdfSubStatus').textContent = 'PDF Â· Signed & emailed âœ“';
-
-      setTimeout(() => {
-        document.getElementById('typingIndicatorPill').style.display = 'none';
-        const reply = document.createElement('div');
-        reply.className = 'chat-bubble-white';
-        reply.style.width = '230px';
-        reply.style.marginLeft = '-22px';
-        reply.style.marginTop = '8px';
-        reply.textContent = 'Done! Signed and emailed to Lincoln Middle School. Added a reminder for Friday.';
-        stream.parentNode.insertBefore(reply, document.getElementById('sendItBar'));
-      }, 650);
-    }
-
-    // Section 3: Interactive Stroller Order Approval
-    function handleOrderDecision(decision) {
-      const buttonsBox = document.getElementById('approvalActionButtons');
-      const banner = document.getElementById('approvalStatusBanner');
-      const topChip = document.getElementById('orderTopChip');
-      buttonsBox.style.display = 'none';
-      banner.style.display = 'block';
-
-      if (decision === 'allow') {
-        banner.style.background = '#ecfdf5';
-        banner.style.color = '#065f46';
-        banner.innerHTML = 'âœ“ Approved Â· Order placed with virtual card â€¢â€¢â€¢â€¢ 1234 <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Undo / Reset demo</span>';
-        topChip.textContent = 'Order confirmed (#NC-8492)';
-      } else {
-        banner.style.background = '#fef2f2';
-        banner.style.color = '#991b1b';
-        banner.innerHTML = 'âœ• Action denied Â· Keepflow canceled checkout <br><span style="text-decoration:underline;cursor:pointer;font-weight:500;font-size:9.5px;" onclick="resetOrderDecision()">Reset demo</span>';
-        topChip.textContent = 'Order canceled by user';
-      }
-    }
-
-    function resetOrderDecision() {
-      document.getElementById('approvalActionButtons').style.display = 'block';
-      document.getElementById('approvalStatusBanner').style.display = 'none';
-      document.getElementById('orderTopChip').textContent = 'Placing an order...';
-    }
-
-    // Section 4: Secure Credentials Store Toggle
-    let pwVisible = false;
-    function toggleCredentialPw() {
-      pwVisible = !pwVisible;
-      const pwEl = document.getElementById('credPasswordText');
-      const btn = document.getElementById('pwToggleBtn');
-      if (pwVisible) {
-        pwEl.textContent = 'kF9#mP2$vL8x';
-        pwEl.style.letterSpacing = '0.5px';
-        btn.textContent = 'Hide';
-      } else {
-        pwEl.textContent = 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢';
-        pwEl.style.letterSpacing = '2px';
-        btn.textContent = 'Show';
-      }
-    }
-
-    function lockCredentialVault() {
-      const btn = document.getElementById('credEnterBtn');
-      btn.textContent = 'âœ“ Encrypted in Zero-Knowledge Vault';
-      btn.style.background = '#10b981';
-    }
-
-    function resetCredentialVault() {
-      const btn = document.getElementById('credEnterBtn');
-      btn.textContent = 'Enter';
-      btn.style.background = 'var(--keep-blue-bright)';
-    }
-
-    // Section 5: Interactive Goals Checklist
-    function toggleGoalItem(item) {
-      item.classList.toggle('completed');
-    }
-
-    // Section 7: Guided Tour Chapters
-    const chapters = [
-      'Chapter 01 â€” Delegating your weekly schedule and travel logistics to Keepflow',
-      'Chapter 02 â€” Watching Keepflow research and compare flights inside your Cloud VM',
-      'Chapter 03 â€” Approving purchases safely with one-time virtual cards'
-    ];
-
-    function switchTourChapter(index, btn) {
-      document.querySelectorAll('.chapter-pill').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('tourCaptionTitle').textContent = chapters[index];
-    }
-
-    function playGuidedTour() {
-      const titleEl = document.getElementById('tourCaptionTitle');
-      if (!titleEl.textContent.startsWith('â–¶ Playing:')) {
-        titleEl.textContent = 'â–¶ Playing: ' + titleEl.textContent;
+          ? `You’re already on the list for <strong>${email}</strong>. We’ll be in touch.`
+          : `You’re on the list, <strong>${email}</strong>. We’ll email you when your spot is ready.`;
       }
     }
 
