@@ -19,6 +19,15 @@ const types = {
   '.xml': 'application/xml; charset=utf-8',
 };
 
+const securityHeaders = {
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Strict-Transport-Security': 'max-age=31536000',
+  'Content-Security-Policy': "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.jsdelivr.net; connect-src 'self' https://tppsxyfsovlawijtnbeq.supabase.co https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src https://www.googletagmanager.com;"
+};
+
 function safePath(urlPath) {
   const raw = decodeURIComponent((urlPath || '/').split('?')[0]);
   const rewrites = {
@@ -38,21 +47,18 @@ function safePath(urlPath) {
 http.createServer((req, res) => {
   const file = safePath(req.url);
   if (!file) {
-    res.writeHead(403); res.end('Forbidden'); return;
+    res.writeHead(403, securityHeaders); res.end('Forbidden'); return;
   }
   fs.stat(file, (err, stat) => {
     const target = !err && stat.isDirectory() ? path.join(file, 'index.html') : file;
     fs.readFile(target, (readErr, data) => {
       if (readErr) {
-        fs.readFile(path.join(root, 'index.html'), (fbErr, fb) => {
-          if (fbErr) { res.writeHead(404); res.end('Not found'); return; }
-          res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-          res.end(fb);
-        });
+        res.writeHead(404, Object.assign({ 'Content-Type': 'text/plain; charset=utf-8' }, securityHeaders));
+        res.end('Not found');
         return;
       }
       const ext = path.extname(target).toLowerCase();
-      res.writeHead(200, { 'Content-Type': types[ext] || 'application/octet-stream' });
+      res.writeHead(200, Object.assign({ 'Content-Type': types[ext] || 'application/octet-stream' }, securityHeaders));
       res.end(data);
     });
   });
