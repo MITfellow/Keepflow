@@ -107,7 +107,7 @@ function fail(msg) {
     if (sitemap.status() !== 200) infra.errors.push('sitemap.xml status != 200');
     if (!infra.details.robotsHasSitemap) infra.errors.push('robots.txt missing sitemap declaration');
     if (!infra.details.sitemapHasXmlns) infra.errors.push('sitemap.xml missing sitemap namespace');
-    if (infra.details.sitemapUrlCount !== ROUTES.length) infra.errors.push(`sitemap has ${infra.details.sitemapUrlCount} URLs, expected ${ROUTES.length}`);
+    if (infra.details.sitemapUrlCount !== 5) infra.errors.push(`sitemap has ${infra.details.sitemapUrlCount} URLs, expected 5 (blog intentionally noindex)`);
     await ctx.close();
   } catch (e) {
     infra.errors.push('infra check error: ' + e.message);
