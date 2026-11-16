@@ -70,3 +70,21 @@ Therefore the switch to `GTM-M4NPF2L4` removed GA4 data collection. This is a GT
 2. Reverting the site to `GTM-W465H4F7`, which already has the working GA4 tag (conflicts with the earlier instruction to use the image container, so owner approval is needed before changing).
 
 No GA4 ID was invented; `G-11DHLHNSE7` was read from the public published container script.
+
+
+## Owner decision (2026-11-16)
+
+The owner chose to **keep `GTM-M4NPF2L4`** as the active container. The site code is therefore unchanged in this respect.
+
+### Required GTM action (owner / GTM editor access)
+1. Open GTM container `GTM-M4NPF2L4`.
+2. Create tag: **Google Analytics: GA4 Configuration**.
+3. Set Measurement ID to **`G-11DHLHNSE7`** (confirm this is the correct GA4 property/web stream for `keepflow.in`).
+4. Set trigger to **All Pages** (initialization).
+5. Enable desired enhanced measurement events in the GA4 web stream (page views, scrolls, outbound clicks, file downloads, form interactions).
+6. **Publish** the container. Publishing is required; saving a draft does not change `gtm.js`.
+7. Verify with GTM Preview / Tag Assistant that the GA4 Configuration tag fires, then check GA4 Realtime and DebugView from two independent devices.
+8. If Realtime is still empty after publishing, check in GA4: correct property, web stream ID, internal traffic filters, data filters, and any consent settings.
+
+### Re-verification command after publishing
+`node scripts/verify-google.js https://keepflow.in` will still PASS for container installation, but GA4 data collection must be confirmed in GA4 Realtime/DebugView; browser network capture should then show `google-analytics.com` / `region1.google-analytics.com` requests.
