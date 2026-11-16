@@ -50,3 +50,23 @@ GTM container used: `GTM-M4NPF2L4` (from owner-provided image; supersedes earlie
 - No GA4 measurement ID, GSC token or credentials were invented.
 - No test events were sent to GA4; verification only inspects container loading and lifecycle dataLayer events.
 - No DNS, Google account, or GTM container settings were modified.
+
+
+## Analytics root-cause update (2026-11-16, second pass)
+
+**Root cause found:** the site currently loads `GTM-M4NPF2L4`, whose published container is empty:
+- `https://www.googletagmanager.com/gtm.js?id=GTM-M4NPF2L4` → HTTP 200 but `"tags":[]`, no `G-` measurement ID.
+- Playwright network capture on the live homepage recorded only the `gtm.js` request. No `google-analytics.com` / `analytics.google.com` / `region1.google-analytics.com` requests were sent.
+- `dataLayer` contained only `gtm.dom` and `gtm.load`; no GA4 page_view/config event.
+
+The previously used container `GTM-W465H4F7` **does** contain a published GA4 configuration:
+- Measurement ID found in the published container: `G-11DHLHNSE7`.
+- Tags include GA4 config/first/last/scope plus enhanced measurement for page views, scroll, outbound clicks, downloads and forms.
+
+Therefore the switch to `GTM-M4NPF2L4` removed GA4 data collection. This is a GTM container configuration issue, not a site-code, consent, ad-blocker, DNS or internal-filter issue that can be diagnosed from the repo.
+
+**Current status:** GA4 Realtime = FAIL / root cause identified. Fix requires either:
+1. Adding a GA4 configuration tag for `G-11DHLHNSE7` inside `GTM-M4NPF2L4` and republishing that container (owner GTM access required), or
+2. Reverting the site to `GTM-W465H4F7`, which already has the working GA4 tag (conflicts with the earlier instruction to use the image container, so owner approval is needed before changing).
+
+No GA4 ID was invented; `G-11DHLHNSE7` was read from the public published container script.
